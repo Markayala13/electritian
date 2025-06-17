@@ -6,6 +6,7 @@ import Acerca from "./components/Acerca";
 import Galeria from "./components/Galeria";
 import PorQueEscogernos  from "./components/PorQueEscogernos";
 import Reviews from "./components/Reviews";
+import Contacto from "./components/Contacto";
 
 import Servicios from "./components/Servicios";
 
@@ -20,6 +21,7 @@ function App() {
       <Servicios />
       <PorQueEscogernos />
       <Reviews />
+      <Contacto/>
       {/* Aquí irán los demás bloques */}
     </div>
   );
