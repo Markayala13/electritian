@@ -8,6 +8,7 @@ import PorQueEscogernos  from "./components/PorQueEscogernos";
 import Reviews from "./components/Reviews";
 import Contacto from "./components/Contacto";
 import Footer from "./components/Footer";
+import "./i18n";
 
 import Servicios from "./components/Servicios";
 

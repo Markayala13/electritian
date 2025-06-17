@@ -1,0 +1,113 @@
+{
+  "hero": {
+    "titulo": "K&G Electrical Service",
+    "descripcion": "Electricistas profesionales en Los Ángeles. Instalación, reparación y proyectos eléctricos residenciales y comerciales con atención personalizada y garantía.",
+    "boton": "Solicita tu cotización"
+  },
+  "navbar": {
+    "home": "Inicio",
+    "servicios": "Servicios",
+    "proyectos": "Proyectos",
+    "contacto": "Contacto"
+  },
+  "porQue": {
+    "titulo": "¿Por qué elegirnos?",
+    "parrafo": "Somos tu mejor opción porque combinamos experiencia, profesionalismo y atención personalizada. Nuestro equipo está certificado, cumple con todos los códigos de California y utiliza materiales de la más alta calidad.",
+    "lista": [
+      "Más de 20 años de experiencia",
+      "Licencia y seguro vigentes",
+      "Atención rápida y confiable",
+      "Garantía en todos nuestros trabajos",
+      "Soluciones a la medida de tus necesidades"
+    ],
+    "imagenTitulo": "¡Elige calidad y seguridad!"
+  },
+  "acerca": {
+    "titulo": "Acerca de Nosotros",
+    "parrafo1": "Somos electricistas certificados con licencia <1>1041959</1> y más de <2>20 años de experiencia</2> en el sector.",
+    "parrafo2": "Cumplimos con todos los códigos eléctricos del estado de California y ofrecemos atención profesional, segura y garantizada para cada proyecto.",
+    "lista": [
+      "Licencia vigente y asegurados",
+      "Más de 20 años de experiencia",
+      "Cumplimiento estricto de normativas",
+      "Atención personalizada"
+    ]
+  },
+
+
+  "contacto": {
+  "titulo": "Contáctanos",
+  "nombre": "Tu nombre",
+  "correo": "Tu correo electrónico",
+  "mensaje": "¿En qué podemos ayudarte?",
+  "boton": "Enviar mensaje",
+  "exito": "¡Mensaje enviado! Te contactaremos pronto.",
+  "error": "Error al enviar el mensaje. Intenta de nuevo."
+},
+"reviews": {
+  "titulo": "Lo que opinan nuestros clientes",
+  "items": [
+    {
+      "nombre": "Carlos",
+      "imagen": "/review2.jpg",
+      "texto": "¡Excelente servicio! Me ayudaron con la instalación eléctrica de mi casa y todo quedó perfecto. Muy profesionales y atentos, los recomiendo totalmente."
+    },
+    {
+      "nombre": "Rex",
+      "imagen": "/review3.jpg",
+      "texto": "Muy buen trabajo y rápidos. Explicaron todo el proceso y resolvieron mis dudas. Sin duda volveré a contratarlos para futuros proyectos."
+    },
+    {
+      "nombre": "Emily",
+      "imagen": "/review1.jpg",
+      "texto": "¡Gran experiencia! El equipo fue amable, eficiente y se aseguró de que todo estuviera conforme a la normativa. Ahora me siento mucho más seguro en casa. ¡Gracias!"
+    }
+  ]
+},
+
+"servicios": {
+  "titulo": "Nuestros Servicios",
+  "descripcion": "Ofrecemos soluciones eléctricas profesionales y seguras, cumpliendo con todos los códigos de California y más de 20 años de experiencia. Nuestro equipo está listo para ayudarte en proyectos residenciales, comerciales y de innovación tecnológica.",
+  "items": [
+    {
+      "titulo": "Instalación de Paneles Eléctricos",
+      "descripcion": "Montaje y actualización de paneles eléctricos para máxima seguridad y eficiencia."
+    },
+    {
+      "titulo": "Instalación de LED Lights",
+      "descripcion": "Iluminación LED moderna y eficiente para interiores y exteriores."
+    },
+    {
+      "titulo": "Mejoras Eléctricas",
+      "descripcion": "Mejoras eléctricas para aumentar la capacidad y seguridad de tu propiedad."
+    },
+    {
+      "titulo": "Instalación de Luces de Jardín",
+      "descripcion": "Iluminación exterior y de jardines para realzar la belleza y seguridad."
+    },
+    {
+      "titulo": "Cargadores para Vehículos Eléctricos",
+      "descripcion": "Instalación profesional de cargadores para autos eléctricos en tu hogar o negocio."
+    },
+    {
+      "titulo": "Residencial y Comercial",
+      "descripcion": "Soluciones eléctricas completas para casas, departamentos, oficinas y negocios."
+    },
+    {
+      "titulo": "Emergencias Eléctricas",
+      "descripcion": "Atención rápida y profesional ante fallas eléctricas o situaciones de riesgo."
+    },
+    {
+      "titulo": "Mantenimiento Preventivo",
+      "descripcion": "Revisiones periódicas y mantenimiento para evitar fallas y prolongar la vida útil de tus instalaciones eléctricas."
+    },
+    {
+      "titulo": "Soluciones Smart Home",
+      "descripcion": "Soluciones inteligentes para controlar la iluminación, seguridad y energía de tu hogar o negocio desde cualquier lugar."
+    }
+  ]
+}
+
+
+
+}

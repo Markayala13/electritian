@@ -1,0 +1,115 @@
+{
+  "hero": {
+    "titulo": "K&G Electrical Service",
+    "descripcion": "Professional electricians in Los Angeles. Installation, repair, and residential and commercial electrical projects with personalized attention and guarantee.",
+    "boton": "Request your quote"
+  },
+  "navbar": {
+    "home": "Home",
+    "servicios": "Services",
+    "proyectos": "Projects",
+    "contacto": "Contact"
+  },
+  "porQue": {
+    "titulo": "Why choose us?",
+    "parrafo": "We are your best choice because we combine experience, professionalism, and personalized attention. Our team is certified, complies with all California codes, and uses the highest quality materials.",
+    "lista": [
+      "Over 20 years of experience",
+      "Valid license and insurance",
+      "Fast and reliable service",
+      "Warranty on all our work",
+      "Solutions tailored to your needs"
+    ],
+    "imagenTitulo": "Choose quality and safety!"
+  },
+  "acerca": {
+    "titulo": "About Us",
+    "parrafo1": "We are certified electricians with license <1>1041959</1> and over <2>20 years of experience</2> in the field.",
+    "parrafo2": "We comply with all California state electrical codes and offer professional, safe, and guaranteed service for every project.",
+    "lista": [
+      "Valid license and insured",
+      "Over 20 years of experience",
+      "Strict compliance with regulations",
+      "Personalized attention"
+    ]
+  },
+
+
+  "contacto": {
+  "titulo": "Contact Us",
+  "nombre": "Your name",
+  "correo": "Your email",
+  "mensaje": "How can we help you?",
+  "boton": "Send message",
+  "exito": "Message sent! We will contact you soon.",
+  "error": "Error sending the message. Please try again."
+},
+
+"reviews": {
+  "titulo": "What our clients say",
+  "items": [
+    {
+      "nombre": "Carlos",
+      "imagen": "/review2.jpg",
+      "texto": "Excellent service! They helped me with the electrical installation in my house and everything was perfect. Very professional and attentive, I totally recommend them."
+    },
+    {
+      "nombre": "Rex",
+      "imagen": "/review3.jpg",
+      "texto": "Very good work and fast. They explained the whole process and answered my questions. I will definitely hire them again for future projects."
+    },
+    {
+      "nombre": "Emily",
+      "imagen": "/review1.jpg",
+      "texto": "Great experience! The team was friendly, efficient, and made sure everything was up to code. I feel much safer at home now. Thank you!"
+    }
+  ]
+},
+
+
+"servicios": {
+  "titulo": "Our Services",
+  "descripcion": "We offer professional and safe electrical solutions, complying with all California codes and over 20 years of experience. Our team is ready to help you with residential, commercial, and technological innovation projects.",
+  "items": [
+    {
+      "titulo": "Electrical Panel Installation",
+      "descripcion": "Assembly and upgrade of electrical panels for maximum safety and efficiency."
+    },
+    {
+      "titulo": "LED Lights Installation",
+      "descripcion": "Modern and efficient LED lighting for indoors and outdoors."
+    },
+    {
+      "titulo": "Electrical Upgrades",
+      "descripcion": "Electrical improvements to increase the capacity and safety of your property."
+    },
+    {
+      "titulo": "Garden Lights Installation",
+      "descripcion": "Outdoor and garden lighting to enhance beauty and safety."
+    },
+    {
+      "titulo": "EV Chargers",
+      "descripcion": "Professional installation of electric car chargers at your home or business."
+    },
+    {
+      "titulo": "Residential and Commercial",
+      "descripcion": "Complete electrical solutions for houses, apartments, offices, and businesses."
+    },
+    {
+      "titulo": "Electrical Emergencies",
+      "descripcion": "Fast and professional attention to electrical failures or risk situations."
+    },
+    {
+      "titulo": "Preventive Maintenance",
+      "descripcion": "Periodic inspections and maintenance to prevent failures and extend the life of your electrical installations."
+    },
+    {
+      "titulo": "Smart Home Solutions",
+      "descripcion": "Smart solutions to control lighting, security, and energy in your home or business from anywhere."
+    }
+  ]
+}
+
+
+
+}
