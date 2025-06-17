@@ -1,4 +1,3 @@
-
 import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -17,7 +16,6 @@ const imagenes = [
   "/3.jpg",
   "/2.jpg",
   "/13.png",
-  // Puedes agregar más imágenes aquí
 ];
 
 export default function Galeria() {
@@ -40,7 +38,11 @@ export default function Galeria() {
   };
 
   return (
-    <section className="bg-white py-12">
+    <section
+      id="galeria"
+      className="bg-white py-12"
+      style={{ scrollMarginTop: "90px" }} // Ajusta según el alto de tu navbar
+    >
       <div className="max-w-4xl mx-auto px-4">
         <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 text-[#23272F]">
           Galería de Trabajos
