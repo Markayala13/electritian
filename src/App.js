@@ -4,6 +4,8 @@ import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Acerca from "./components/Acerca";
 import Galeria from "./components/Galeria";
+import PorQueEscogernos  from "./components/PorQueEscogernos";
+import Reviews from "./components/Reviews";
 
 import Servicios from "./components/Servicios";
 
@@ -16,6 +18,8 @@ function App() {
       <Acerca />
       <Galeria />
       <Servicios />
+      <PorQueEscogernos />
+      <Reviews />
       {/* Aquí irán los demás bloques */}
     </div>
   );
