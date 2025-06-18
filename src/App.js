@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "./components/Navbar";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
@@ -10,10 +10,15 @@ import Contacto from "./components/Contacto";
 import Footer from "./components/Footer";
 import WhatsAppButton from "./components/WhatsAppButton";
 import Servicios from "./components/Servicios";
+import Login from "./components/Login";
+import ZonaPrivada from "./components/ZonaPrivada";
 import "./i18n";
 import { Helmet } from "react-helmet";
 
 function App() {
+  const [autenticado, setAutenticado] = useState(false);
+  const [mostrarLogin, setMostrarLogin] = useState(false);
+
   return (
     <div>
       <Helmet>
@@ -38,17 +43,39 @@ function App() {
         <meta name="robots" content="index, follow" />
         <html lang="es" />
       </Helmet>
-      <Navbar />
-      <Header />
-      <Hero />
-      <Acerca />
-      <Galeria />
-      <Servicios />
-      <PorQueEscogernos />
-      <Reviews />
-      <Contacto />
-      <Footer />
-      <WhatsAppButton />
+      {autenticado ? (
+        <ZonaPrivada />
+      ) : (
+        <>
+          <Navbar />
+          <Header />
+          <Hero />
+          <Acerca />
+          <Galeria />
+          <Servicios />
+          <PorQueEscogernos />
+          <Reviews />
+          <Contacto />
+          <Footer />
+          <WhatsAppButton />
+          {/* Botón para mostrar el login */}
+          <button
+            onClick={() => setMostrarLogin(true)}
+            className="fixed bottom-24 right-6 z-50 bg-[#FFD700] text-[#23272F] px-4 py-2 rounded-full shadow hover:bg-[#00BFA6] hover:text-white transition"
+          >
+            Acceso equipo
+          </button>
+          {/* Muestra el login si se pide */}
+          {mostrarLogin && (
+            <Login
+              onLogin={() => {
+                setAutenticado(true);
+                setMostrarLogin(false);
+              }}
+            />
+          )}
+        </>
+      )}
     </div>
   );
 }
