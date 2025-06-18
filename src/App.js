@@ -8,6 +8,7 @@ import PorQueEscogernos  from "./components/PorQueEscogernos";
 import Reviews from "./components/Reviews";
 import Contacto from "./components/Contacto";
 import Footer from "./components/Footer";
+import WhatsAppButton from "./components/WhatsAppButton";
 import "./i18n";
 
 import Servicios from "./components/Servicios";
@@ -25,6 +26,7 @@ function App() {
       <Reviews />
       <Contacto/>
       <Footer />
+      <WhatsAppButton />
       {/* Aquí irán los demás bloques */}
     </div>
   );
