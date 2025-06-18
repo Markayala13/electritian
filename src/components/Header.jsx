@@ -9,7 +9,7 @@ export default function Header() {
     >
       <div className="flex items-center gap-4">
         <img
-          src="/img/k&g-logo(1).png"
+          src=""
           alt=""
           className="h-16"
         />

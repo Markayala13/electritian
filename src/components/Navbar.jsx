@@ -12,11 +12,11 @@ export default function Navbar() {
         {/* Logo a la izquierda */}
         <div className="flex items-center gap-2">
           <img
-            src="/IMAGE1.png"
-            alt="K&G Logo"
-            className="h-10 w-auto rounded"
+            src="K&G Logo(1).PNG"
+            alt=""
+          className="h-12 w-auto rounded"
           />
-          <span className="font-bold text-xl tracking-widest">K&G</span>
+          <span className="font-bold text-xl tracking-widest"></span>
         </div>
         {/* Botón hamburguesa */}
         <button
@@ -39,14 +39,14 @@ export default function Navbar() {
               className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-2xl shadow hover:scale-110 transition"
               title="Español"
             >
-              <span role="img" aria-label="Español">🇪🇸</span>
+             <img src="esp.png" alt="English" className="w-full h-full object-cover rounded-full" />
             </button>
             <button
               onClick={() => i18n.changeLanguage("en")}
               className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-2xl shadow hover:scale-110 transition"
               title="English"
             >
-              <span role="img" aria-label="English">🇺🇸</span>
+              <img src="usa.png" alt="English" className="w-full h-full object-cover rounded-full" />
             </button>
           </li>
         </ul>
@@ -64,14 +64,14 @@ export default function Navbar() {
               className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-2xl shadow"
               title="Español"
             >
-              <span role="img" aria-label="Español">🇪🇸</span>
+              <img src="esp.png" alt="English" className="w-full h-full object-cover rounded-full" />
             </button>
             <button
               onClick={() => { i18n.changeLanguage("en"); setOpen(false); }}
               className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-2xl shadow"
               title="English"
             >
-              <span role="img" aria-label="English">🇺🇸</span>
+           <img src="usa.png" alt="English" className="w-full h-full object-cover rounded-full" />
             </button>
           </li>
         </ul>
