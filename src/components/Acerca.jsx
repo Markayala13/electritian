@@ -27,18 +27,19 @@ export default function Acerca() {
           </ul>
         </div>
         {/* Video a la derecha */}
-        <div className="flex-1 w-full flex justify-center">
-          <div className="aspect-w-16 aspect-h-9 w-full max-w-xl rounded-2xl overflow-hidden shadow-lg">
-            <iframe
-              src="https://www.youtube.com/embed/VIDEO_ID"
-              title="Video de presentación"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="w-full h-full"
-            ></iframe>
-          </div>
-        </div>
+      <div className="flex-1 w-full flex justify-center">
+  <div className="w-full max-w-xl rounded-2xl overflow-hidden shadow-lg bg-gray-100" style={{minHeight: "350px"}}>
+    <iframe
+      src="https://www.youtube.com/embed/9O2eWDRMDFQ"
+      title="Video de presentación"
+      frameBorder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowFullScreen
+      className="w-full h-full"
+      style={{minHeight: "350px"}}
+    ></iframe>
+  </div>
+</div>
       </div>
     </section>
   );
