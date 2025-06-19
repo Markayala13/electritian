@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { Zap, Calculator, AlertTriangle, CheckCircle, XCircle, Wrench, Cable } from "lucide-react";
 
+import ConduitFillCalculator from "./ConduitFillCalculator"; // Asegúrate de importar el componente correcto  
+
+
+
 // Tabla de calibres AWG
 const tablaCalibres = [
   { amperaje: 15, calibre: "14 AWG" },
@@ -133,117 +137,117 @@ function CalculadoraCalibreCable() {
   );
 }
 
-// Componente de Calculadora de Llenado de Conduit
-function ConduitFillCalculator() {
-  const [conduitSize, setConduitSize] = useState("");
-  const [wireGauge, setWireGauge] = useState("");
-  const [resultado, setResultado] = useState("");
-  const [tipoResultado, setTipoResultado] = useState("");
 
-  const calcular = () => {
-    if (!conduitSize || !wireGauge) {
-      setResultado("Selecciona tanto el tamaño del conduit como el calibre del cable.");
-      setTipoResultado("error");
-      return;
-    }
+// function ConduitFillCalculator() {
+//   const [conduitSize, setConduitSize] = useState("");
+//   const [wireGauge, setWireGauge] = useState("");
+//   const [resultado, setResultado] = useState("");
+//   const [tipoResultado, setTipoResultado] = useState("");
 
-    const maxWires = conduitFillData[conduitSize]?.[wireGauge];
-    if (maxWires !== undefined) {
-      setResultado(`Máximo de cables permitidos: ${maxWires} cables`);
-      setTipoResultado("success");
-    } else {
-      setResultado("Combinación no encontrada en la tabla.");
-      setTipoResultado("error");
-    }
-  };
+//   const calcular = () => {
+//     if (!conduitSize || !wireGauge) {
+//       setResultado("Selecciona tanto el tamaño del conduit como el calibre del cable.");
+//       setTipoResultado("error");
+//       return;
+//     }
 
-  const getResultIcon = () => {
-    switch (tipoResultado) {
-      case "success":
-        return <CheckCircle className="w-5 h-5 text-green-500" />;
-      case "error":
-        return <XCircle className="w-5 h-5 text-red-500" />;
-      default:
-        return <AlertTriangle className="w-5 h-5 text-yellow-500" />;
-    }
-  };
+//     const maxWires = conduitFillData[conduitSize]?.[wireGauge];
+//     if (maxWires !== undefined) {
+//       setResultado(`Máximo de cables permitidos: ${maxWires} cables`);
+//       setTipoResultado("success");
+//     } else {
+//       setResultado("Combinación no encontrada en la tabla.");
+//       setTipoResultado("error");
+//     }
+//   };
 
-  const getResultStyle = () => {
-    switch (tipoResultado) {
-      case "success":
-        return "bg-green-50 border-green-200 text-green-800";
-      case "error":
-        return "bg-red-50 border-red-200 text-red-800";
-      default:
-        return "bg-yellow-50 border-yellow-200 text-yellow-800";
-    }
-  };
+//   const getResultIcon = () => {
+//     switch (tipoResultado) {
+//       case "success":
+//         return <CheckCircle className="w-5 h-5 text-green-500" />;
+//       case "error":
+//         return <XCircle className="w-5 h-5 text-red-500" />;
+//       default:
+//         return <AlertTriangle className="w-5 h-5 text-yellow-500" />;
+//     }
+//   };
 
-  return (
-    <div className="space-y-6">
-      <div className="grid md:grid-cols-2 gap-4">
-        <div className="space-y-2">
-          <label className="block text-sm font-semibold text-gray-700">
-            Tamaño del Conduit (pulgadas)
-          </label>
-          <select
-            value={conduitSize}
-            onChange={(e) => setConduitSize(e.target.value)}
-            className="w-full px-4 py-4 text-lg border-2 border-gray-200 rounded-xl focus:border-orange-500 focus:ring-4 focus:ring-orange-100 transition-all duration-200 outline-none"
-          >
-            <option value="">Selecciona tamaño</option>
-            {Object.keys(conduitFillData).map((size) => (
-              <option key={size} value={size}>
-                {size}"
-              </option>
-            ))}
-          </select>
-        </div>
+//   const getResultStyle = () => {
+//     switch (tipoResultado) {
+//       case "success":
+//         return "bg-green-50 border-green-200 text-green-800";
+//       case "error":
+//         return "bg-red-50 border-red-200 text-red-800";
+//       default:
+//         return "bg-yellow-50 border-yellow-200 text-yellow-800";
+//     }
+//   };
 
-        <div className="space-y-2">
-          <label className="block text-sm font-semibold text-gray-700">
-            Calibre del Cable (AWG)
-          </label>
-          <select
-            value={wireGauge}
-            onChange={(e) => setWireGauge(e.target.value)}
-            className="w-full px-4 py-4 text-lg border-2 border-gray-200 rounded-xl focus:border-orange-500 focus:ring-4 focus:ring-orange-100 transition-all duration-200 outline-none"
-          >
-            <option value="">Selecciona calibre</option>
-            <option value="14">14 AWG</option>
-            <option value="12">12 AWG</option>
-            <option value="10">10 AWG</option>
-            <option value="8">8 AWG</option>
-            <option value="6">6 AWG</option>
-            <option value="4">4 AWG</option>
-            <option value="3">3 AWG</option>
-            <option value="2">2 AWG</option>
-            <option value="1">1 AWG</option>
-            <option value="1/0">1/0 AWG</option>
-            <option value="2/0">2/0 AWG</option>
-            <option value="3/0">3/0 AWG</option>
-            <option value="4/0">4/0 AWG</option>
-          </select>
-        </div>
-      </div>
+//   return (
+//     <div className="space-y-6">
+//       <div className="grid md:grid-cols-2 gap-4">
+//         <div className="space-y-2">
+//           <label className="block text-sm font-semibold text-gray-700">
+//             Tamaño del Conduit (pulgadas)
+//           </label>
+//           <select
+//             value={conduitSize}
+//             onChange={(e) => setConduitSize(e.target.value)}
+//             className="w-full px-4 py-4 text-lg border-2 border-gray-200 rounded-xl focus:border-orange-500 focus:ring-4 focus:ring-orange-100 transition-all duration-200 outline-none"
+//           >
+//             <option value="">Selecciona tamaño</option>
+//             {Object.keys(conduitFillData).map((size) => (
+//               <option key={size} value={size}>
+//                 {size}"
+//               </option>
+//             ))}
+//           </select>
+//         </div>
 
-      <button
-        onClick={calcular}
-        className="w-full bg-gradient-to-r from-orange-500 to-red-600 text-white font-bold py-4 px-6 rounded-xl hover:from-orange-600 hover:to-red-700 focus:ring-4 focus:ring-orange-100 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center gap-2"
-      >
-        <Wrench className="w-5 h-5" />
-        Calcular Llenado
-      </button>
+//         <div className="space-y-2">
+//           <label className="block text-sm font-semibold text-gray-700">
+//             Calibre del Cable (AWG)
+//           </label>
+//           <select
+//             value={wireGauge}
+//             onChange={(e) => setWireGauge(e.target.value)}
+//             className="w-full px-4 py-4 text-lg border-2 border-gray-200 rounded-xl focus:border-orange-500 focus:ring-4 focus:ring-orange-100 transition-all duration-200 outline-none"
+//           >
+//             <option value="">Selecciona calibre</option>
+//             <option value="14">14 AWG</option>
+//             <option value="12">12 AWG</option>
+//             <option value="10">10 AWG</option>
+//             <option value="8">8 AWG</option>
+//             <option value="6">6 AWG</option>
+//             <option value="4">4 AWG</option>
+//             <option value="3">3 AWG</option>
+//             <option value="2">2 AWG</option>
+//             <option value="1">1 AWG</option>
+//             <option value="1/0">1/0 AWG</option>
+//             <option value="2/0">2/0 AWG</option>
+//             <option value="3/0">3/0 AWG</option>
+//             <option value="4/0">4/0 AWG</option>
+//           </select>
+//         </div>
+//       </div>
 
-      {resultado && (
-        <div className={`p-4 rounded-xl border-2 flex items-center gap-3 ${getResultStyle()}`}>
-          {getResultIcon()}
-          <span className="font-semibold">{resultado}</span>
-        </div>
-      )}
-    </div>
-  );
-}
+//       <button
+//         onClick={calcular}
+//         className="w-full bg-gradient-to-r from-orange-500 to-red-600 text-white font-bold py-4 px-6 rounded-xl hover:from-orange-600 hover:to-red-700 focus:ring-4 focus:ring-orange-100 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center gap-2"
+//       >
+//         <Wrench className="w-5 h-5" />
+//         Calcular Llenado
+//       </button>
+
+//       {resultado && (
+//         <div className={`p-4 rounded-xl border-2 flex items-center gap-3 ${getResultStyle()}`}>
+//           {getResultIcon()}
+//           <span className="font-semibold">{resultado}</span>
+//         </div>
+//       )}
+//     </div>
+//   );
+// }
 
 // Componente principal
 export default function ZonaPrivada() {
@@ -353,4 +357,5 @@ export default function ZonaPrivada() {
     </div>
   );
 }
+
 
