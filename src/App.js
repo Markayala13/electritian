@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+//import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
@@ -18,6 +19,20 @@ import { Helmet } from "react-helmet";
 function App() {
   const [autenticado, setAutenticado] = useState(false);
   const [mostrarLogin, setMostrarLogin] = useState(false);
+
+
+  const loginRef = useRef(null);
+
+// Hacer scroll al login cuando se muestre
+useEffect(() => {
+  if (mostrarLogin && loginRef.current) {
+    loginRef.current.scrollIntoView({ 
+      behavior: 'smooth', 
+      block: 'center' 
+    });
+  }
+}, [mostrarLogin]);
+
 
   return (
     <div>
@@ -65,15 +80,16 @@ function App() {
           >
             Acceso equipo
           </button>
-          {/* Muestra el login si se pide */}
-          {mostrarLogin && (
-            <Login
-              onLogin={() => {
-                setAutenticado(true);
-                setMostrarLogin(false);
-              }}
-            />
-          )}
+{mostrarLogin && (
+  <div ref={loginRef}>
+    <Login
+      onLogin={() => {
+        setAutenticado(true);
+        setMostrarLogin(false);
+      }}
+    />
+  </div>
+)}
         </>
       )}
     </div>
