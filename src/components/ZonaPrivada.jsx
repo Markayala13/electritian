@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import { Zap, Calculator, AlertTriangle, CheckCircle, XCircle, Wrench, Cable } from "lucide-react";
+import { Calculator, AlertTriangle, CheckCircle, XCircle, Wrench, Cable, BookOpen, Zap } from "lucide-react";
 
-import ConduitFillCalculator from "./ConduitFillCalculator"; // Asegúrate de importar el componente correcto  
-
-
+import ConduitFillCalculator from "./ConduitFillCalculator";
 
 // Tabla de calibres AWG
 const tablaCalibres = [
@@ -32,20 +30,6 @@ const tablaCalibres = [
   { amperaje: 520, calibre: "900 kcmil" },
   { amperaje: 545, calibre: "1000 kcmil" },
 ];
-
-// Tabla de llenado de conduit
-const conduitFillData = {
-  "1/2": { "14": 9, "12": 7, "10": 5, "8": 2, "6": 1 },
-  "3/4": { "14": 15, "12": 12, "10": 9, "8": 4, "6": 3, "4": 1 },
-  "1": { "14": 26, "12": 20, "10": 15, "8": 7, "6": 5, "4": 3, "3": 2, "2": 1 },
-  "1-1/4": { "14": 40, "12": 31, "10": 24, "8": 12, "6": 9, "4": 5, "3": 4, "2": 3, "1": 1 },
-  "1-1/2": { "14": 53, "12": 41, "10": 31, "8": 16, "6": 12, "4": 7, "3": 5, "2": 4, "1": 2, "1/0": 1 },
-  "2": { "14": 89, "12": 68, "10": 52, "8": 28, "6": 20, "4": 12, "3": 9, "2": 7, "1": 4, "1/0": 3, "2/0": 2, "3/0": 1 },
-  "2-1/2": { "14": 142, "12": 109, "10": 84, "8": 45, "6": 32, "4": 19, "3": 15, "2": 11, "1": 7, "1/0": 5, "2/0": 4, "3/0": 3, "4/0": 2 },
-  "3": { "14": 203, "12": 157, "10": 119, "8": 64, "6": 46, "4": 27, "3": 21, "2": 16, "1": 10, "1/0": 8, "2/0": 6, "3/0": 4, "4/0": 3 },
-  "3-1/2": { "14": 270, "12": 208, "10": 158, "8": 85, "6": 61, "4": 36, "3": 28, "2": 21, "1": 13, "1/0": 10, "2/0": 8, "3/0": 6, "4/0": 4 },
-  "4": { "14": 343, "12": 264, "10": 201, "8": 108, "6": 78, "4": 46, "3": 35, "2": 27, "1": 17, "1/0": 13, "2/0": 10, "3/0": 8, "4/0": 6 }
-};
 
 // Componente de Calculadora de Calibre
 function CalculadoraCalibreCable() {
@@ -137,117 +121,269 @@ function CalculadoraCalibreCable() {
   );
 }
 
+// Componente de Tutoriales
+function ComponenteTutoriales() {
+  const [categoriaActiva, setCategoriaActiva] = useState("switches");
 
-// function ConduitFillCalculator() {
-//   const [conduitSize, setConduitSize] = useState("");
-//   const [wireGauge, setWireGauge] = useState("");
-//   const [resultado, setResultado] = useState("");
-//   const [tipoResultado, setTipoResultado] = useState("");
+  const tutoriales = {
+    switches: [
+      {
+        titulo: "Cómo Instalar un Switch Básico",
+        canal: "The Electrician U",
+        duracion: "27 min",
+        descripcion: "Tutorial completo sobre instalación de switches, desde el cableado hasta la conexión final.",
+        url: "https://www.youtube.com/watch?v=4oRFwlCS4jo",
+        puntosClave: [
+          "Montaje de cajas eléctricas",
+          "Instalación de Romex 12/2",
+          "Conexión de switch de 15A",
+          "Instalación de fixture sin llave"
+        ]
+      },
+      {
+        titulo: "Switch de 3 Vías - Instalación Correcta",
+        canal: "Family Handyman",
+        duracion: "3:47 min",
+        descripcion: "Aprende a cablear switches de 3 vías para controlar una luz desde dos ubicaciones.",
+        url: "https://www.youtube.com/watch?v=Ba8aJoxGmzs",
+        puntosClave: [
+          "Identificación del terminal común",
+          "Etiquetado de cables",
+          "Conexión de ambos switches",
+          "Instalación de la luz"
+        ]
+      },
+      {
+        titulo: "Cómo Encender y Apagar un Foco desde Tres Lugares",
+        canal: "Tecnología y Soluciones Ingeniosas",
+        duracion: "8:00 min",
+        descripcion: "Tutorial completo para instalar switches de 4 vías y controlar una luz desde tres ubicaciones diferentes.",
+        url: "https://youtu.be/b5vugs1xYiQ",
+        puntosClave: [
+          "Identificación de cables en switches de 4 vías",
+          "Conexión del cable común",
+          "Instalación de múltiples puntos de control",
+          "Pruebas de funcionamiento"
+        ]
+      }
+    ],
+    outlets: [
+      {
+        titulo: "Instalación de Outlets - Tutorial Rápido",
+        canal: "Making Sawdust",
+        duracion: "2:02 min",
+        descripcion: "El tutorial más rápido de YouTube para instalar outlets correctamente.",
+        url: "https://www.youtube.com/watch?v=rTzH5PnmqHk",
+        puntosClave: [
+          "Preparación del cable Romex",
+          "Conexión: Verde-Tierra, Blanco-Plata, Negro-Cobre",
+          "Técnicas de doblado de cables",
+          "Uso de probadores eléctricos"
+        ]
+      },
+      {
+        titulo: "Cómo Hallar la Fase y el Neutro en un Tomacorriente",
+        canal: "Tecnología y Soluciones Ingeniosas",
+        duracion: "5:15 min", 
+        descripcion: "Método simple y seguro para identificar fase y neutro en outlets usando herramientas básicas.",
+        url: "https://youtu.be/EE0paCB0GCI",
+        puntosClave: [
+          "Uso del probador de voltaje",
+          "Identificación visual de cables",
+          "Medidas de seguridad",
+          "Verificación con multímetro"
+        ]
+      }
+    ],
+    luces: [
+      {
+        titulo: "Instalación de Luces Empotradas (Can Lights)",
+        canal: "The Home Depot",
+        duracion: "4:30 min",
+        descripcion: "Guía completa para instalar luces empotradas paso a paso.",
+        url: "https://www.youtube.com/watch?v=I5v6kRQVUUc",
+        puntosClave: [
+          "Plantillas y marcado en el techo",
+          "Localización de vigas",
+          "Corte de agujeros",
+          "Cableado y montaje"
+        ]
+      }
+    ],
+    ventilacion: [
+      {
+        titulo: "Instalación de Extractor de Baño",
+        canal: "This Old House",
+        duracion: "7:33 min",
+        descripcion: "Instalación profesional de ventilador de baño con timer.",
+        url: "https://www.youtube.com/watch?v=Zm_k6WmH7ys",
+        puntosClave: [
+          "Conexión desde switch existente",
+          "Instalación de timer con múltiples opciones",
+          "Montaje entre vigas",
+          "Ducto hacia exterior"
+        ]
+      }
+    ],
+    fundamentos: [
+      {
+        titulo: "Curso Completo de Electricidad Paso a Paso",
+        canal: "Tecnología y Soluciones Ingeniosas",
+        duracion: "45:00 min",
+        descripcion: "Curso completo desde conceptos básicos hasta instalaciones prácticas para principiantes.",
+        url: "https://www.youtube.com/watch?v=QgxXUkyeDFs",
+        puntosClave: [
+          "Conceptos básicos de voltaje y corriente",
+          "Instalación de interruptores simples",
+          "Conexión de múltiples focos",
+          "Prácticas de seguridad eléctrica"
+        ]
+      },
+      {
+        titulo: "Electricity for Beginners - Voltage, Current, Power",
+        canal: "RGB Engineering",
+        duracion: "23:32 min",
+        descripcion: "Fundamentos de ingeniería eléctrica explicados por un ingeniero eléctrico profesional.",
+        url: "https://www.youtube.com/watch?v=YBqP0J0LDYs",
+        puntosClave: [
+          "Conceptos de carga y corriente",
+          "Explicación de voltaje y potencia",
+          "Elementos básicos de circuitos",
+          "Ejemplos prácticos con simulaciones"
+        ]
+      },
+      {
+        titulo: "Electricidad Básica 0: Entender la Electricidad de la Casa",
+        canal: "Bricocrack",
+        duracion: "18:45 min",
+        descripcion: "Explicación de cómo funciona la electricidad doméstica comparándola con la fontanería para facilitar el entendimiento.",
+        url: "https://www.youtube.com/watch?v=IBXCiZQvBUs",
+        puntosClave: [
+          "Diferencia de potencial y tensión",
+          "Intensidad y resistencia eléctrica",
+          "Cálculo de intensidad por circuito",
+          "Dimensionado de cables y automáticos"
+        ]
+      }
+    ],
+    errores: [
+      {
+        titulo: "7 Errores en Instalaciones Eléctricas que Debes Evitar",
+        canal: "Tecnología y Soluciones Ingeniosas",
+        duracion: "12:30 min",
+        descripcion: "Los errores más comunes en instalaciones eléctricas residenciales y cómo evitarlos.",
+        url: "https://youtu.be/Lr09BWA6ZaA",
+        puntosClave: [
+          "Errores en conexiones de neutro",
+          "Problemas con la puesta a tierra",
+          "Sobrecarga de circuitos",
+          "Uso incorrecto de materiales"
+        ]
+      },
+      {
+        titulo: "10 Errores de Electricidad Residencial que Debes Evitar",
+        canal: "Tecnología y Soluciones Ingeniosas",
+        duracion: "15:20 min", 
+        descripcion: "Los 10 errores más críticos en electricidad residencial con soluciones prácticas.",
+        url: "https://youtu.be/nJnAfoNvmHE",
+        puntosClave: [
+          "Errores de cálculo de cargas",
+          "Problemas de aislamiento",
+          "Conexiones mal ejecutadas",
+          "Incumplimiento de normativas"
+        ]
+      }
+    ]
+  };
 
-//   const calcular = () => {
-//     if (!conduitSize || !wireGauge) {
-//       setResultado("Selecciona tanto el tamaño del conduit como el calibre del cable.");
-//       setTipoResultado("error");
-//       return;
-//     }
+  const categorias = [
+    { id: "switches", nombre: "Switches", icono: "⚡", color: "blue" },
+    { id: "outlets", nombre: "Outlets", icono: "🔌", color: "green" },
+    { id: "luces", nombre: "Luces", icono: "💡", color: "yellow" },
+    { id: "ventilacion", nombre: "Ventilación", icono: "🌪️", color: "purple" },
+    { id: "fundamentos", nombre: "Fundamentos", icono: "📚", color: "indigo" },
+    { id: "errores", nombre: "Errores Comunes", icono: "⚠️", color: "red" }
+  ];
 
-//     const maxWires = conduitFillData[conduitSize]?.[wireGauge];
-//     if (maxWires !== undefined) {
-//       setResultado(`Máximo de cables permitidos: ${maxWires} cables`);
-//       setTipoResultado("success");
-//     } else {
-//       setResultado("Combinación no encontrada en la tabla.");
-//       setTipoResultado("error");
-//     }
-//   };
+  return (
+    <div className="space-y-6">
+      {/* Selector de Categorías */}
+      <div className="flex flex-wrap justify-center gap-2 mb-6">
+        {categorias.map((categoria) => (
+          <button
+            key={categoria.id}
+            onClick={() => setCategoriaActiva(categoria.id)}
+            className={`px-4 py-2 rounded-xl font-semibold transition-all duration-200 flex items-center gap-2 ${
+              categoriaActiva === categoria.id
+                ? `bg-gradient-to-r from-${categoria.color}-500 to-${categoria.color}-600 text-white shadow-md`
+                : "bg-gray-100 text-gray-600 hover:text-gray-800"
+            }`}
+          >
+            <span>{categoria.icono}</span>
+            {categoria.nombre}
+          </button>
+        ))}
+      </div>
 
-//   const getResultIcon = () => {
-//     switch (tipoResultado) {
-//       case "success":
-//         return <CheckCircle className="w-5 h-5 text-green-500" />;
-//       case "error":
-//         return <XCircle className="w-5 h-5 text-red-500" />;
-//       default:
-//         return <AlertTriangle className="w-5 h-5 text-yellow-500" />;
-//     }
-//   };
+      {/* Lista de Tutoriales */}
+      <div className="grid gap-4">
+        {tutoriales[categoriaActiva]?.map((tutorial, index) => (
+          <div key={index} className="bg-white rounded-xl shadow-md p-6 border border-gray-100 hover:shadow-lg transition-shadow">
+            <div className="flex justify-between items-start mb-4">
+              <div className="flex-1">
+                <h3 className="text-lg font-bold text-gray-800 mb-2">{tutorial.titulo}</h3>
+                <div className="flex items-center gap-4 text-sm text-gray-600 mb-2">
+                  <span className="flex items-center gap-1">
+                    📺 {tutorial.canal}
+                  </span>
+                  <span className="flex items-center gap-1">
+                    ⏱️ {tutorial.duracion}
+                  </span>
+                </div>
+                <p className="text-gray-600 mb-3">{tutorial.descripcion}</p>
+              </div>
+            </div>
 
-//   const getResultStyle = () => {
-//     switch (tipoResultado) {
-//       case "success":
-//         return "bg-green-50 border-green-200 text-green-800";
-//       case "error":
-//         return "bg-red-50 border-red-200 text-red-800";
-//       default:
-//         return "bg-yellow-50 border-yellow-200 text-yellow-800";
-//     }
-//   };
+            {/* Puntos Clave */}
+            <div className="mb-4">
+              <h4 className="font-semibold text-gray-700 mb-2">🎯 Puntos Clave:</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                {tutorial.puntosClave.map((punto, idx) => (
+                  <div key={idx} className="flex items-center gap-2 text-sm text-gray-600">
+                    <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+                    {punto}
+                  </div>
+                ))}
+              </div>
+            </div>
 
-//   return (
-//     <div className="space-y-6">
-//       <div className="grid md:grid-cols-2 gap-4">
-//         <div className="space-y-2">
-//           <label className="block text-sm font-semibold text-gray-700">
-//             Tamaño del Conduit (pulgadas)
-//           </label>
-//           <select
-//             value={conduitSize}
-//             onChange={(e) => setConduitSize(e.target.value)}
-//             className="w-full px-4 py-4 text-lg border-2 border-gray-200 rounded-xl focus:border-orange-500 focus:ring-4 focus:ring-orange-100 transition-all duration-200 outline-none"
-//           >
-//             <option value="">Selecciona tamaño</option>
-//             {Object.keys(conduitFillData).map((size) => (
-//               <option key={size} value={size}>
-//                 {size}"
-//               </option>
-//             ))}
-//           </select>
-//         </div>
+            {/* Botón Ver Tutorial */}
+            <a
+              href={tutorial.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-red-500 to-red-600 text-white font-semibold py-2 px-4 rounded-lg hover:from-red-600 hover:to-red-700 transition-all duration-200"
+            >
+              ▶️ Ver en YouTube
+            </a>
+          </div>
+        ))}
+      </div>
 
-//         <div className="space-y-2">
-//           <label className="block text-sm font-semibold text-gray-700">
-//             Calibre del Cable (AWG)
-//           </label>
-//           <select
-//             value={wireGauge}
-//             onChange={(e) => setWireGauge(e.target.value)}
-//             className="w-full px-4 py-4 text-lg border-2 border-gray-200 rounded-xl focus:border-orange-500 focus:ring-4 focus:ring-orange-100 transition-all duration-200 outline-none"
-//           >
-//             <option value="">Selecciona calibre</option>
-//             <option value="14">14 AWG</option>
-//             <option value="12">12 AWG</option>
-//             <option value="10">10 AWG</option>
-//             <option value="8">8 AWG</option>
-//             <option value="6">6 AWG</option>
-//             <option value="4">4 AWG</option>
-//             <option value="3">3 AWG</option>
-//             <option value="2">2 AWG</option>
-//             <option value="1">1 AWG</option>
-//             <option value="1/0">1/0 AWG</option>
-//             <option value="2/0">2/0 AWG</option>
-//             <option value="3/0">3/0 AWG</option>
-//             <option value="4/0">4/0 AWG</option>
-//           </select>
-//         </div>
-//       </div>
-
-//       <button
-//         onClick={calcular}
-//         className="w-full bg-gradient-to-r from-orange-500 to-red-600 text-white font-bold py-4 px-6 rounded-xl hover:from-orange-600 hover:to-red-700 focus:ring-4 focus:ring-orange-100 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center gap-2"
-//       >
-//         <Wrench className="w-5 h-5" />
-//         Calcular Llenado
-//       </button>
-
-//       {resultado && (
-//         <div className={`p-4 rounded-xl border-2 flex items-center gap-3 ${getResultStyle()}`}>
-//           {getResultIcon()}
-//           <span className="font-semibold">{resultado}</span>
-//         </div>
-//       )}
-//     </div>
-//   );
-// }
+      {/* Nota de Seguridad */}
+      <div className="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-r-xl">
+        <h3 className="font-semibold text-yellow-800 mb-3">⚠️ Importante - Seguridad Eléctrica:</h3>
+        <ul className="text-sm text-yellow-700 space-y-1">
+          <li>• **Siempre apaga la electricidad** en el panel principal antes de trabajar</li>
+          <li>• **Verifica con un probador** que no hay corriente antes de tocar cables</li>
+          <li>• **Consulta códigos locales** - algunos trabajos requieren electricista licenciado</li>
+          <li>• **Usa herramientas aisladas** y equipo de protección personal</li>
+          <li>• **Si no estás seguro, contrata un profesional** - la seguridad es lo primero</li>
+        </ul>
+      </div>
+    </div>
+  );
+}
 
 // Componente principal
 export default function ZonaPrivada() {
@@ -268,7 +404,7 @@ export default function ZonaPrivada() {
 
         {/* Selector de Calculadora */}
         <div className="flex justify-center mb-8">
-          <div className="bg-white rounded-2xl shadow-lg p-2 flex">
+          <div className="bg-white rounded-2xl shadow-lg p-2 flex flex-wrap gap-1">
             <button
               onClick={() => setCalculadoraActiva("calibre")}
               className={`px-6 py-3 rounded-xl font-semibold transition-all duration-200 flex items-center gap-2 ${
@@ -291,6 +427,17 @@ export default function ZonaPrivada() {
               <Cable className="w-5 h-5" />
               Llenado de Conduit
             </button>
+            <button
+              onClick={() => setCalculadoraActiva("tutoriales")}
+              className={`px-6 py-3 rounded-xl font-semibold transition-all duration-200 flex items-center gap-2 ${
+                calculadoraActiva === "tutoriales"
+                  ? "bg-gradient-to-r from-green-500 to-emerald-600 text-white shadow-md"
+                  : "text-gray-600 hover:text-gray-800"
+              }`}
+            >
+              <BookOpen className="w-5 h-5" />
+              Tutoriales
+            </button>
           </div>
         </div>
 
@@ -311,7 +458,7 @@ export default function ZonaPrivada() {
               </div>
               <CalculadoraCalibreCable />
             </div>
-          ) : (
+          ) : calculadoraActiva === "conduit" ? (
             <div>
               <div className="text-center mb-6">
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-orange-500 to-red-600 rounded-full mb-4 shadow-lg">
@@ -325,6 +472,21 @@ export default function ZonaPrivada() {
                 </p>
               </div>
               <ConduitFillCalculator />
+            </div>
+          ) : (
+            <div>
+              <div className="text-center mb-6">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full mb-4 shadow-lg">
+                  <BookOpen className="w-8 h-8 text-white" />
+                </div>
+                <h2 className="text-2xl font-bold text-gray-800 mb-2">
+                  Tutoriales de Electricidad
+                </h2>
+                <p className="text-gray-600">
+                  Guías paso a paso para instalaciones eléctricas
+                </p>
+              </div>
+              <ComponenteTutoriales />
             </div>
           )}
         </div>
@@ -357,5 +519,3 @@ export default function ZonaPrivada() {
     </div>
   );
 }
-
-
