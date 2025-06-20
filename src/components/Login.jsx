@@ -8,7 +8,7 @@ export default function Login({ onLogin }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Cambia estos valores por los que tú quieras
-    if (user === "kgadmin" && pass === "supersecreto") {
+    if (user === "chicho" && pass === "123") {
       onLogin();
     } else {
       setError("Usuario o contraseña incorrectos");
