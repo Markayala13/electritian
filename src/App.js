@@ -19,20 +19,17 @@ import { Helmet } from "react-helmet";
 function App() {
   const [autenticado, setAutenticado] = useState(false);
   const [mostrarLogin, setMostrarLogin] = useState(false);
-
-
   const loginRef = useRef(null);
 
-// Hacer scroll al login cuando se muestre
-useEffect(() => {
-  if (mostrarLogin && loginRef.current) {
-    loginRef.current.scrollIntoView({ 
-      behavior: 'smooth', 
-      block: 'center' 
-    });
-  }
-}, [mostrarLogin]);
-
+  // Hacer scroll al login cuando se muestre
+  useEffect(() => {
+    if (mostrarLogin && loginRef.current) {
+      loginRef.current.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'center' 
+      });
+    }
+  }, [mostrarLogin]);
 
   return (
     <div>
@@ -80,16 +77,16 @@ useEffect(() => {
           >
             Acceso equipo
           </button>
-{mostrarLogin && (
-  <div ref={loginRef}>
-    <Login
-      onLogin={() => {
-        setAutenticado(true);
-        setMostrarLogin(false);
-      }}
-    />
-  </div>
-)}
+          {mostrarLogin && (
+            <div ref={loginRef}>
+              <Login
+                onLogin={() => {
+                  setAutenticado(true);
+                  setMostrarLogin(false);
+                }}
+              />
+            </div>
+          )}
         </>
       )}
     </div>

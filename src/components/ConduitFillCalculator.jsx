@@ -239,15 +239,15 @@ const ConduitFillCalculator = () => {
       <div className="text-center mb-6">
         <div className="flex justify-center items-center mb-4 flex-wrap">
           <Zap className="text-yellow-500 mr-2" size={24} />
-          <h1 className="text-xl md:text-3xl font-bold text-gray-900 text-center">
+          <h1 className="text-xl md:text-3xl font-bold text-white text-center">
             Calculadora de Conduit Fill - California
           </h1>
           <Zap className="text-yellow-500 ml-2" size={24} />
         </div>
-        <p className="text-gray-600 text-sm md:text-lg font-semibold px-2">
+        <p className="text-white text-sm md:text-lg font-semibold px-2">
           🟢 EMT • 🔵 Rigid Steel • 🟠 PVC Sch 40 • 🔴 PVC Sch 80
         </p>
-        <p className="text-xs md:text-sm text-gray-500 mt-2">
+        <p className="text-xs md:text-sm text-[#B0B8C1] mt-2">
           Basado en NEC 2023 - Código Eléctrico de California
         </p>
       </div>
@@ -255,11 +255,11 @@ const ConduitFillCalculator = () => {
       {/* Type Selection Highlight - Responsive */}
       <div className="bg-gradient-to-r from-yellow-400 to-orange-500 rounded-xl p-3 md:p-4 mb-6 text-center">
         <h2 className="text-lg md:text-xl font-bold text-white mb-2">🔧 SELECCIONA TU TIPO DE CONDUIT/TUBO</h2>
-        <p className="text-white/90 text-sm md:text-base">Cada tipo tiene diferentes capacidades según NEC California</p>
+        <p className="text-white text-sm md:text-base">Cada tipo tiene diferentes capacidades según NEC California</p>
       </div>
 
       {/* Calculator Section - Responsive Grid */}
-      <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-4 md:p-6 text-white mb-6">
+      <div className="bg-gradient-to-r from-blue-600 to-[#00BFA6] rounded-xl p-4 md:p-6 text-white mb-6">
         <h2 className="text-lg md:text-xl font-semibold mb-4 md:mb-6 flex items-center">
           <Calculator className="mr-3" />
           Calculadora Principal
@@ -268,7 +268,7 @@ const ConduitFillCalculator = () => {
         {/* Grid responsivo mejorado */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           <div className="md:col-span-2 lg:col-span-1">
-            <label className="block text-sm font-medium mb-2">
+            <label className="block text-base font-semibold text-white mb-2">
               🔧 Tipo de Conduit/Tubo
             </label>
             <select 
@@ -287,7 +287,7 @@ const ConduitFillCalculator = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">
+            <label className="block text-base font-semibold text-white mb-2">
               📏 Tamaño (pulgadas)
             </label>
             <select 
@@ -302,7 +302,7 @@ const ConduitFillCalculator = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">
+            <label className="block text-base font-semibold text-white mb-2">
               🔌 Tipo de Conductor
             </label>
             <select 
@@ -317,7 +317,7 @@ const ConduitFillCalculator = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">
+            <label className="block text-base font-semibold text-white mb-2">
               ⚡ Calibre AWG/kcmil
             </label>
             <select 
@@ -333,100 +333,87 @@ const ConduitFillCalculator = () => {
         </div>
 
         <div className="bg-white/10 backdrop-blur rounded-lg p-4">
-          <p className="text-xs md:text-sm opacity-90 mb-2 font-medium">{getConduitDescription(selectedConduitType)}</p>
+          <p className="text-sm text-white opacity-90 mb-2 font-medium">{getConduitDescription(selectedConduitType)}</p>
         </div>
       </div>
 
       {/* Results Section - Stack en mobile */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 mb-6 md:mb-8">
         {/* Main Result */}
-        <div className="bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl p-4 md:p-6 text-white">
-          <h3 className="text-base md:text-lg font-semibold mb-4">📊 Resultado Principal</h3>
+        <div className="bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl p-5 md:p-8 text-white shadow-lg">
+          <h3 className="text-base md:text-lg font-semibold mb-4 text-blue-100">📊 Resultado Principal</h3>
           <div className="text-center">
-            <div className="text-3xl md:text-5xl font-bold mb-2">{maxConductors}</div>
-            <div className="text-sm md:text-lg">Conductores Máximos</div>
-            <div className="text-xs md:text-sm opacity-90 mt-2">
+            <div className="text-4xl md:text-5xl font-bold mb-2 text-yellow-300 drop-shadow">{maxConductors}</div>
+            <div className="text-base md:text-lg text-gray-100">Conductores Máximos</div>
+            <div className="text-xs md:text-sm opacity-90 mt-2 text-blue-100">
               {selectedConductorType} {selectedConductorSize} AWG en {selectedConduitType} {selectedConduitSize}"
             </div>
           </div>
         </div>
 
         {/* Technical Details */}
-        <div className="bg-gradient-to-br from-orange-500 to-red-500 rounded-xl p-4 md:p-6 text-white">
-          <h3 className="text-base md:text-lg font-semibold mb-4">🔧 Detalles Técnicos</h3>
-          <div className="space-y-2 md:space-y-3">
-            <div className="flex justify-between text-sm md:text-base">
-              <span>Área del Conduit (40%):</span>
-              <span className="font-semibold">{conduitArea}" sq</span>
+        <div className="bg-gradient-to-br from-orange-500 to-red-500 rounded-2xl p-5 md:p-8 text-white shadow-lg">
+          <h3 className="text-base md:text-lg font-semibold mb-4 text-orange-100">🔧 Detalles Técnicos</h3>
+          <div className="space-y-3 md:space-y-4">
+            <div className="flex justify-between text-base md:text-lg">
+              <span className="text-gray-100">Área del Conduit (40%):</span>
+              <span className="font-bold text-yellow-200">{conduitArea}" sq</span>
             </div>
-            <div className="flex justify-between text-sm md:text-base">
-              <span>Área por Conductor:</span>
-              <span className="font-semibold">{conductorArea}" sq</span>
+            <div className="flex justify-between text-base md:text-lg">
+              <span className="text-gray-100">Área por Conductor:</span>
+              <span className="font-bold text-yellow-200">{conductorArea}" sq</span>
             </div>
-            <div className="flex justify-between text-sm md:text-base">
-              <span>Área Total Usada:</span>
-              <span className="font-semibold">{totalConductorArea.toFixed(4)}" sq</span>
+            <div className="flex justify-between text-base md:text-lg">
+              <span className="text-gray-100">Área Total Usada:</span>
+              <span className="font-bold text-yellow-200">{totalConductorArea.toFixed(4)}" sq</span>
             </div>
-            <div className="flex justify-between text-sm md:text-base">
-              <span>% de Llenado:</span>
-              <span className="font-semibold">{fillPercentage}%</span>
+            <div className="flex justify-between text-base md:text-lg">
+              <span className="text-gray-100">% de Llenado:</span>
+              <span className="font-bold text-yellow-200">{fillPercentage}%</span>
             </div>
           </div>
         </div>
       </div>
 
       {/* Comparison Table - Scroll horizontal en mobile */}
-      <div className="bg-gray-50 rounded-xl p-4 md:p-6 mb-6">
-        <h3 className="text-lg md:text-xl font-semibold mb-4 text-gray-900">
+      <div className="bg-gray-900/90 rounded-2xl p-3 md:p-6 mb-8 shadow-xl overflow-x-auto">
+        <h3 className="text-lg md:text-xl font-semibold mb-4 text-blue-100">
           📋 Comparación de Capacidades - {selectedConductorType} {selectedConductorSize} AWG
         </h3>
         <div className="overflow-x-auto">
-          <table className="w-full border-collapse min-w-[600px]">
+          <table className="w-full border-collapse min-w-[600px] text-gray-100 text-sm md:text-base">
             <thead>
-              <tr className="bg-gray-200">
-                <th className="border border-gray-300 px-2 md:px-4 py-3 text-left font-semibold text-sm md:text-base">Tamaño</th>
-                <th className="border border-gray-300 px-2 md:px-4 py-3 text-center font-semibold text-sm md:text-base">🟢 EMT</th>
-                <th className="border border-gray-300 px-2 md:px-4 py-3 text-center font-semibold text-sm md:text-base">🔵 Rigid Steel</th>
-                <th className="border border-gray-300 px-2 md:px-4 py-3 text-center font-semibold text-sm md:text-base">🟠 PVC Sch 40</th>
-                <th className="border border-gray-300 px-2 md:px-4 py-3 text-center font-semibold text-sm md:text-base">🔴 PVC Sch 80</th>
-                <th className="border border-gray-300 px-2 md:px-4 py-3 text-center font-semibold text-sm md:text-base">🟣 Metalic Aluminum Flexible Conduit</th>
-                <th className="border border-gray-300 px-2 md:px-4 py-3 text-center font-semibold text-sm md:text-base">🟦 Liquidtight Flexible Nonmetallic PVC</th>
-                <th className="border border-gray-300 px-2 md:px-4 py-3 text-center font-semibold text-sm md:text-base">🟫 Liquidtight Flexible Metalic</th>
+              <tr className="bg-gray-800/95 text-blue-100">
+                <th className="border border-gray-700 px-3 md:px-5 py-3 text-left font-bold rounded-tl-2xl">Tamaño</th>
+                <th className="border border-gray-700 px-3 md:px-5 py-3 text-center font-bold">🟢 EMT</th>
+                <th className="border border-gray-700 px-3 md:px-5 py-3 text-center font-bold">🔵 Rigid Steel</th>
+                <th className="border border-gray-700 px-3 md:px-5 py-3 text-center font-bold">🟠 PVC Sch 40</th>
+                <th className="border border-gray-700 px-3 md:px-5 py-3 text-center font-bold">🔴 PVC Sch 80</th>
+                <th className="border border-gray-700 px-3 md:px-5 py-3 text-center font-bold">🟣 Metalic Aluminum Flexible Conduit</th>
+                <th className="border border-gray-700 px-3 md:px-5 py-3 text-center font-bold">🟦 Liquidtight Flexible Nonmetallic PVC</th>
+                <th className="border border-gray-700 px-3 md:px-5 py-3 text-center font-bold rounded-tr-2xl">🟫 Liquidtight Flexible Metalic</th>
               </tr>
             </thead>
             <tbody>
-              {availableSizes.EMT.map(size => {
+              {availableSizes.EMT.map((size, idx) => {
                 const conductorArea = conductorAreas[selectedConductorType]?.[selectedConductorSize] || 0;
                 return (
-                  <tr key={size} className="hover:bg-gray-100">
-                    <td className="border border-gray-300 px-2 md:px-4 py-2 font-medium text-sm md:text-base">{size}"</td>
-                    <td className="border border-gray-300 px-2 md:px-4 py-2 text-center text-sm md:text-base">
-                      {conduitAreas.EMT[size] ? Math.floor(conduitAreas.EMT[size] / conductorArea) : '-'}
-                    </td>
-                    <td className="border border-gray-300 px-2 md:px-4 py-2 text-center text-sm md:text-base">
-                      {conduitAreas['Rigid Steel'][size] ? Math.floor(conduitAreas['Rigid Steel'][size] / conductorArea) : '-'}
-                    </td>
-                    <td className="border border-gray-300 px-2 md:px-4 py-2 text-center text-sm md:text-base">
-                      {conduitAreas['PVC Sch 40'][size] ? Math.floor(conduitAreas['PVC Sch 40'][size] / conductorArea) : '-'}
-                    </td>
-                    <td className="border border-gray-300 px-2 md:px-4 py-2 text-center text-sm md:text-base">
-                      {conduitAreas['PVC Sch 80'][size] ? Math.floor(conduitAreas['PVC Sch 80'][size] / conductorArea) : '-'}
-                    </td>
-                    <td className="border border-gray-300 px-2 md:px-4 py-2 text-center text-sm md:text-base">
-                      {conduitAreas['Metalic Aluminum Flexible Conduit'][size] ? Math.floor(conduitAreas['Metalic Aluminum Flexible Conduit'][size] / conductorArea) : '-'}
-                    </td>
-                    <td className="border border-gray-300 px-2 md:px-4 py-2 text-center text-sm md:text-base">
-                      {conduitAreas['Liquidtight Flexible Nonmetallic PVC'][size] ? Math.floor(conduitAreas['Liquidtight Flexible Nonmetallic PVC'][size] / conductorArea) : '-'}
-                    </td>
-                    <td className="border border-gray-300 px-2 md:px-4 py-2 text-center text-sm md:text-base">
-                      {conduitAreas['Liquidtight Flexible Metalic'][size] ? Math.floor(conduitAreas['Liquidtight Flexible Metalic'][size] / conductorArea) : '-'}
-                    </td>
+                  <tr key={size} className={idx % 2 === 0 ? 'bg-gray-800/70' : 'bg-gray-900/60'}>
+                    <td className="border border-gray-700 px-3 md:px-5 py-3 font-bold text-blue-100">{size}"</td>
+                    <td className="border border-gray-700 px-3 md:px-5 py-3 text-center font-semibold">{conduitAreas.EMT[size] ? Math.floor(conduitAreas.EMT[size] / conductorArea) : '-'}</td>
+                    <td className="border border-gray-700 px-3 md:px-5 py-3 text-center font-semibold">{conduitAreas['Rigid Steel'][size] ? Math.floor(conduitAreas['Rigid Steel'][size] / conductorArea) : '-'}</td>
+                    <td className="border border-gray-700 px-3 md:px-5 py-3 text-center font-semibold">{conduitAreas['PVC Sch 40'][size] ? Math.floor(conduitAreas['PVC Sch 40'][size] / conductorArea) : '-'}</td>
+                    <td className="border border-gray-700 px-3 md:px-5 py-3 text-center font-semibold">{conduitAreas['PVC Sch 80'][size] ? Math.floor(conduitAreas['PVC Sch 80'][size] / conductorArea) : '-'}</td>
+                    <td className="border border-gray-700 px-3 md:px-5 py-3 text-center font-semibold">{conduitAreas['Metalic Aluminum Flexible Conduit'][size] ? Math.floor(conduitAreas['Metalic Aluminum Flexible Conduit'][size] / conductorArea) : '-'}</td>
+                    <td className="border border-gray-700 px-3 md:px-5 py-3 text-center font-semibold">{conduitAreas['Liquidtight Flexible Nonmetallic PVC'][size] ? Math.floor(conduitAreas['Liquidtight Flexible Nonmetallic PVC'][size] / conductorArea) : '-'}</td>
+                    <td className="border border-gray-700 px-3 md:px-5 py-3 text-center font-semibold">{conduitAreas['Liquidtight Flexible Metalic'][size] ? Math.floor(conduitAreas['Liquidtight Flexible Metalic'][size] / conductorArea) : '-'}</td>
                   </tr>
                 );
               })}
             </tbody>
           </table>
         </div>
+        <div className="text-xs text-blue-200 mt-2 text-center opacity-80">Desliza la tabla &rarr; para ver más columnas en móvil</div>
       </div>
 
       {/* Notes - Texto más pequeño en mobile */}

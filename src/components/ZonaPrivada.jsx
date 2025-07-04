@@ -74,18 +74,18 @@ function CalculadoraCalibreCable() {
   const getResultStyle = () => {
     switch (tipoResultado) {
       case "success":
-        return "bg-green-50 border-green-200 text-green-800";
+        return "bg-[#5ED36A] bg-opacity-20 border-[#5ED36A] text-[#FFFFFF]";
       case "error":
-        return "bg-red-50 border-red-200 text-red-800";
+        return "bg-[#9E5CBD] bg-opacity-20 border-[#9E5CBD] text-[#FFFFFF]";
       default:
-        return "bg-yellow-50 border-yellow-200 text-yellow-800";
+        return "bg-[#F7B84B] bg-opacity-20 border-[#F7B84B] text-[#FFFFFF]";
     }
   };
 
   return (
     <div className="space-y-6">
       <div className="space-y-4">
-        <label className="block text-sm font-semibold text-gray-700">
+        <label className="block text-sm font-semibold text-[#FFFFFF]">
           Amperaje Requerido (A)
         </label>
         <div className="relative">
@@ -96,15 +96,15 @@ function CalculadoraCalibreCable() {
             onChange={(e) => setAmperaje(e.target.value)}
             onKeyPress={handleKeyPress}
             placeholder="Ingresa el amperaje"
-            className="w-full px-4 py-4 text-lg border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 outline-none pl-12"
+            className="w-full px-4 py-4 text-lg border-2 border-[#8B8F92] bg-[#5E6468] text-[#FFFFFF] rounded-xl focus:border-[#F7B84B] focus:ring-4 focus:ring-[#F7B84B] focus:ring-opacity-20 transition-all duration-200 outline-none pl-12 placeholder-[#8B8F92]"
           />
-          <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400">⚡</span>
+          <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[#F7B84B]">⚡</span>
         </div>
       </div>
 
       <button
         onClick={calcular}
-        className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-bold py-4 px-6 rounded-xl hover:from-blue-600 hover:to-indigo-700 focus:ring-4 focus:ring-blue-100 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center gap-2"
+        className="w-full bg-[#F7B84B] text-[#000000] font-bold py-4 px-6 rounded-xl hover:bg-[#F7B84B] hover:opacity-90 focus:ring-4 focus:ring-[#F7B84B] focus:ring-opacity-20 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center gap-2"
       >
         🧮 Calcular Calibre
       </button>
@@ -112,7 +112,7 @@ function CalculadoraCalibreCable() {
       {resultado && (
         <div className={`p-4 rounded-xl border-2 flex items-center gap-3 ${getResultStyle()}`}>
           <span>{getResultIcon()}</span>
-          <span className="font-semibold">{resultado}</span>
+          <span className="font-semibold text-[#FFFFFF]">{resultado}</span>
         </div>
       )}
     </div>
@@ -821,11 +821,11 @@ function ComponenteTutoriales() {
       <div className="grid gap-4">
         {tutoriales[categoriaActiva]?.length > 0 ? (
           tutoriales[categoriaActiva].map((tutorial, index) => (
-            <div key={index} className="bg-white rounded-xl shadow-md p-6 border border-gray-100 hover:shadow-lg transition-shadow">
+            <div key={index} className="bg-[#1E1D1A] rounded-xl shadow-lg p-6 border border-[#F7B84B] hover:shadow-xl transition-all duration-300" style={{boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)'}}>
               <div className="flex justify-between items-start mb-4">
                 <div className="flex-1">
-                  <h3 className="text-lg font-bold text-gray-800 mb-2">{tutorial.titulo}</h3>
-                  <div className="flex items-center gap-4 text-sm text-gray-600 mb-2">
+                  <h3 className="text-lg font-bold text-[#FFFFFF] mb-2">{tutorial.titulo}</h3>
+                  <div className="flex items-center gap-4 text-sm text-[#8B8F92] mb-2">
                     <span className="flex items-center gap-1">
                       📺 {tutorial.canal}
                     </span>
@@ -833,17 +833,17 @@ function ComponenteTutoriales() {
                       ⏱️ {tutorial.duracion}
                     </span>
                   </div>
-                  <p className="text-gray-600 mb-3">{tutorial.descripcion}</p>
+                  <p className="text-[#8B8F92] mb-3">{tutorial.descripcion}</p>
                 </div>
               </div>
 
               {/* Puntos Clave */}
               <div className="mb-4">
-                <h4 className="font-semibold text-gray-700 mb-2">🎯 Puntos Clave:</h4>
+                <h4 className="font-semibold text-[#F7B84B] mb-2">🎯 Puntos Clave:</h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                   {tutorial.puntosClave.map((punto, idx) => (
-                    <div key={idx} className="flex items-center gap-2 text-sm text-gray-600">
-                      <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+                    <div key={idx} className="flex items-center gap-2 text-sm text-[#FFFFFF]">
+                      <span className="w-2 h-2 bg-[#F7B84B] rounded-full"></span>
                       {punto}
                     </div>
                   ))}
@@ -855,24 +855,24 @@ function ComponenteTutoriales() {
                 href={tutorial.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-red-500 to-red-600 text-white font-semibold py-2 px-4 rounded-lg hover:from-red-600 hover:to-red-700 transition-all duration-200"
+                className="inline-flex items-center gap-2 bg-[#F7B84B] text-[#000000] font-semibold py-2 px-4 rounded-lg hover:bg-[#F7B84B] hover:opacity-90 transition-all duration-200"
               >
                 ▶️ Ver en YouTube
               </a>
             </div>
           ))
         ) : (
-          <div className="text-center py-12 bg-gray-50 rounded-xl border-2 border-dashed border-gray-300">
-            <p className="text-gray-600 mb-4">📚 Tutoriales en preparación para esta categoría</p>
-            <p className="text-sm text-gray-500">Próximamente: Tutoriales profesionales de {categorias.find(cat => cat.id === categoriaActiva)?.nombre}</p>
+          <div className="text-center py-12 bg-[#1E1D1A] rounded-xl border-2 border-dashed border-[#F7B84B]" style={{boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)'}}>
+            <p className="text-[#FFFFFF] mb-4">📚 Tutoriales en preparación para esta categoría</p>
+            <p className="text-sm text-[#8B8F92]">Próximamente: Tutoriales profesionales de {categorias.find(cat => cat.id === categoriaActiva)?.nombre}</p>
           </div>
         )}
       </div>
 
       {/* Nota de Seguridad */}
-      <div className="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-r-xl">
-        <h3 className="font-semibold text-yellow-800 mb-3">⚠️ Importante - Seguridad Eléctrica:</h3>
-        <ul className="text-sm text-yellow-700 space-y-1">
+      <div className="bg-[#1E1D1A] border-l-4 border-[#F7B84B] p-6 rounded-r-xl" style={{boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)'}}>
+        <h3 className="font-semibold text-[#F7B84B] mb-3">⚠️ Importante - Seguridad Eléctrica:</h3>
+        <ul className="text-sm text-[#FFFFFF] space-y-1">
           <li>• **Siempre apaga la electricidad** en el panel principal antes de trabajar</li>
           <li>• **Verifica con un probador** que no hay corriente antes de tocar cables</li>
           <li>• **Consulta códigos locales** - algunos trabajos requieren electricista licenciado</li>
@@ -888,198 +888,151 @@ function ComponenteTutoriales() {
 const ZonaPrivada = () => {
   const [calculadoraActiva, setCalculadoraActiva] = useState("calibre");
 
+  useEffect(() => {
+    document.documentElement.classList.add('dark');
+    return () => {
+      document.documentElement.classList.remove('dark');
+    };
+  }, []);
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 p-4">
-      <div className="max-w-6xl mx-auto">
+    <div
+      className="relative min-h-screen bg-[#1E1D1A] text-white overflow-hidden px-4"
+      style={{
+        minHeight: '100vh',
+      }}
+    >
+      {/* Overlay de fondo */}
+      <div className="absolute inset-0 z-10 bg-[#1E1D1A]" aria-hidden="true" />
+      <div className="relative z-20 max-w-6xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-2xl md:text-4xl font-bold text-gray-800 mb-4">
+        <div className="text-center mb-8 mt-6 md:mt-10">
+          <h1 className="text-2xl md:text-4xl font-extrabold text-[#F7B84B] mb-4 tracking-wider">
             Zona Privada - Herramientas Eléctricas
           </h1>
-          <p className="text-gray-600 text-sm md:text-lg">
+          <p className="text-[#8B8F92] text-base md:text-lg mb-2 font-medium">
             Herramientas profesionales para electricistas
           </p>
         </div>
-
-        {/* Selector de Herramienta - VERSIÓN CORREGIDA */}
-        <div className="flex justify-center mb-8">
-          <div className="bg-white rounded-2xl shadow-lg p-2">
+        {/* Selector de Herramienta */}
+        <div className="flex justify-center mb-6 md:mb-8">
+          <div className="bg-[#8B8F92] bg-opacity-20 rounded-xl p-2 md:p-4 w-full max-w-2xl flex flex-col md:flex-row gap-2 md:gap-4" style={{boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)'}}>
             {/* Desktop: Botones en fila */}
-            <div className="hidden md:flex gap-1">
+            <div className="flex flex-row md:gap-2 gap-1 w-full justify-center">
               <button
                 onClick={() => setCalculadoraActiva("calibre")}
-                className={`px-6 py-3 rounded-xl font-semibold transition-all duration-200 flex items-center gap-2 whitespace-nowrap ${
+                className={`flex-1 px-3 py-3 md:px-6 md:py-3 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 whitespace-nowrap text-xs md:text-base ${
                   calculadoraActiva === "calibre"
-                    ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-md"
-                    : "text-gray-600 hover:text-gray-800"
+                    ? "bg-[#F7B84B] text-[#000000]"
+                    : "text-[#8B8F92] font-regular"
                 }`}
               >
                 ⚡ Calibre de Cable
               </button>
               <button
                 onClick={() => setCalculadoraActiva("conduit")}
-                className={`px-6 py-3 rounded-xl font-semibold transition-all duration-200 flex items-center gap-2 whitespace-nowrap ${
+                className={`flex-1 px-3 py-3 md:px-6 md:py-3 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 whitespace-nowrap text-xs md:text-base ${
                   calculadoraActiva === "conduit"
-                    ? "bg-gradient-to-r from-orange-500 to-red-600 text-white shadow-md"
-                    : "text-gray-600 hover:text-gray-800"
+                    ? "bg-[#F7B84B] text-[#000000]"
+                    : "text-[#8B8F92] font-regular"
                 }`}
               >
                 🔧 Llenado de Conduit
               </button>
               <button
                 onClick={() => setCalculadoraActiva("tutoriales")}
-                className={`px-6 py-3 rounded-xl font-semibold transition-all duration-200 flex items-center gap-2 whitespace-nowrap ${
+                className={`flex-1 px-3 py-3 md:px-6 md:py-3 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 whitespace-nowrap text-xs md:text-base ${
                   calculadoraActiva === "tutoriales"
-                    ? "bg-gradient-to-r from-purple-500 to-pink-600 text-white shadow-md"
-                    : "text-gray-600 hover:text-gray-800"
+                    ? "bg-[#F7B84B] text-[#000000]"
+                    : "text-[#8B8F92] font-regular"
                 }`}
               >
                 📚 Tutoriales
               </button>
-              {/* <button
-                onClick={() => setCalculadoraActiva("notas")}
-                className={`px-6 py-3 rounded-xl font-semibold transition-all duration-200 flex items-center gap-2 whitespace-nowrap ${
-                  calculadoraActiva === "notas"
-                    ? "bg-gradient-to-r from-green-500 to-emerald-600 text-white shadow-md"
-                    : "text-gray-600 hover:text-gray-800"
-                }`}
-              >
-                📝 Notas
-              </button> */}
-            </div>
-
-            {/* Mobile: Grid 2x2 */}
-            <div className="grid grid-cols-2 gap-2 md:hidden">
-              <button
-                onClick={() => setCalculadoraActiva("calibre")}
-                className={`px-3 py-3 rounded-xl font-semibold transition-all duration-200 flex flex-col items-center gap-1 text-sm ${
-                  calculadoraActiva === "calibre"
-                    ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-md"
-                    : "text-gray-600 hover:text-gray-800"
-                }`}
-              >
-                <span className="text-lg">⚡</span>
-                <span>Calibre</span>
-              </button>
-              <button
-                onClick={() => setCalculadoraActiva("conduit")}
-                className={`px-3 py-3 rounded-xl font-semibold transition-all duration-200 flex flex-col items-center gap-1 text-sm ${
-                  calculadoraActiva === "conduit"
-                    ? "bg-gradient-to-r from-orange-500 to-red-600 text-white shadow-md"
-                    : "text-gray-600 hover:text-gray-800"
-                }`}
-              >
-                <span className="text-lg">🔧</span>
-                <span>Conduit</span>
-              </button>
-              <button
-                onClick={() => setCalculadoraActiva("tutoriales")}
-                className={`px-3 py-3 rounded-xl font-semibold transition-all duration-200 flex flex-col items-center gap-1 text-sm ${
-                  calculadoraActiva === "tutoriales"
-                    ? "bg-gradient-to-r from-purple-500 to-pink-600 text-white shadow-md"
-                    : "text-gray-600 hover:text-gray-800"
-                }`}
-              >
-                <span className="text-lg">📚</span>
-                <span>Tutoriales</span>
-              </button>
-              {/* <button
-                onClick={() => setCalculadoraActiva("notas")}
-                className={`px-3 py-3 rounded-xl font-semibold transition-all duration-200 flex flex-col items-center gap-1 text-sm ${
-                  // calculadoraActiva === "notas"
-                    ? "bg-gradient-to-r from-green-500 to-emerald-600 text-white shadow-md"
-                    : "text-gray-600 hover:text-gray-800"
-                }`}
-              >
-                <span className="text-lg">📝</span>
-                <span>Notas</span>
-              </button> */}
             </div>
           </div>
         </div>
-
         {/* Herramienta Activa */}
-        <div className="bg-white rounded-2xl shadow-xl p-4 md:p-8 mb-6 border border-gray-100">
+        <div className="mb-10 md:mb-12">
           {calculadoraActiva === "calibre" ? (
-            <div>
-              <div className="text-center mb-6">
-                <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full mb-4 shadow-lg">
-                  <span className="text-xl md:text-2xl">⚡</span>
+            <div className="bg-[#8B8F92] bg-opacity-10 rounded-xl p-6 md:p-10 mb-8" style={{boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)'}}>
+              <div className="text-center mb-8">
+                <div className="inline-flex items-center justify-center w-14 h-14 md:w-20 md:h-20 bg-[#28ACA6] rounded-full mb-5">
+                  <span className="text-2xl md:text-3xl text-[#FFFFFF]">⚡</span>
                 </div>
-                <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-2">
+                <h2 className="text-2xl md:text-3xl font-extrabold text-[#F7B84B] mb-3 tracking-wider">
                   Calculadora de Calibre de Cable
                 </h2>
-                <p className="text-gray-600 text-sm md:text-base">
+                <p className="text-[#8B8F92] text-base md:text-lg mb-2 font-medium">
                   Encuentra el calibre mínimo según el amperaje requerido
                 </p>
               </div>
               <CalculadoraCalibreCable />
             </div>
           ) : calculadoraActiva === "conduit" ? (
-            <div>
-              <div className="text-center mb-6">
-                <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 bg-gradient-to-r from-orange-500 to-red-600 rounded-full mb-4 shadow-lg">
-                  <span className="text-xl md:text-2xl">🔧</span>
+            <div className="bg-[#8B8F92] bg-opacity-10 rounded-xl p-6 md:p-10 mb-8" style={{boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)'}}>
+              <div className="text-center mb-8">
+                <div className="inline-flex items-center justify-center w-14 h-14 md:w-20 md:h-20 bg-[#5ED36A] rounded-full mb-5">
+                  <span className="text-2xl md:text-3xl text-[#FFFFFF]">🔧</span>
                 </div>
-                <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-2">
+                <h2 className="text-2xl md:text-3xl font-extrabold text-[#F7B84B] mb-3 tracking-wider">
                   Calculadora de Llenado de Conduit
                 </h2>
-                <p className="text-gray-600 text-sm md:text-base">
+                <p className="text-[#8B8F92] text-base md:text-lg mb-2 font-medium">
                   Determina el número máximo de cables por conduit
                 </p>
               </div>
               <ConduitFillCalculator />
             </div>
           ) : calculadoraActiva === "tutoriales" ? (
-            <div>
-              <div className="text-center mb-6">
-                <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full mb-4 shadow-lg">
-                  <span className="text-xl md:text-2xl">📚</span>
+            <div className="bg-[#8B8F92] bg-opacity-10 rounded-xl p-6 md:p-10 mb-8" style={{boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)'}}>
+              <div className="text-center mb-8">
+                <div className="inline-flex items-center justify-center w-14 h-14 md:w-20 md:h-20 bg-[#9E5CBD] rounded-full mb-5">
+                  <span className="text-2xl md:text-3xl text-[#FFFFFF]">📚</span>
                 </div>
-                <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-2">
+                <h2 className="text-2xl md:text-3xl font-extrabold text-[#F7B84B] mb-3 tracking-wider">
                   Tutoriales de Electricidad
                 </h2>
-                <p className="text-gray-600 text-sm md:text-base">
+                <p className="text-[#8B8F92] text-base md:text-lg mb-2 font-medium">
                   Guías paso a paso para instalaciones eléctricas
                 </p>
               </div>
               <ComponenteTutoriales />
             </div>
           ) : (
-            <div>
-              <div className="text-center mb-6">
-                <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full mb-4 shadow-lg">
-                  <span className="text-xl md:text-2xl">📝</span>
+            <div className="bg-[#23272F] rounded-2xl shadow-2xl p-6 md:p-10 border-2 border-[#00BFA6] mb-8">
+              <div className="text-center mb-8">
+                <div className="inline-flex items-center justify-center w-14 h-14 md:w-20 md:h-20 bg-gradient-to-r from-blue-500 to-[#00BFA6] rounded-full mb-5 shadow-lg">
+                  <span className="text-2xl md:text-3xl text-[#FFD700]">📝</span>
                 </div>
-                <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-2">
+                <h2 className="text-2xl md:text-3xl font-bold text-[#00BFA6] mb-3 drop-shadow tracking-wide">
                   Notas de Trabajo
                 </h2>
-                <p className="text-gray-600 text-sm md:text-base">
+                <p className="text-[#B0B8C1] text-base md:text-lg mb-2 font-medium">
                   Organiza tus notas, materiales y recordatorios
                 </p>
               </div>
-             {/* <ComponenteNotas /> */}
+              {/* <ComponenteNotas /> */}
             </div>
           )}
         </div>
-
         {/* Información Técnica */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-          <div className="bg-white rounded-xl shadow-md p-4 md:p-6 border border-gray-100">
-            <h3 className="font-semibold text-gray-800 mb-2 flex items-center gap-2 text-sm md:text-base">
+          <div className="bg-[#8B8F92] bg-opacity-10 rounded-xl p-4 md:p-6" style={{boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)'}}>
+            <h3 className="font-semibold text-[#F7B84B] mb-2 flex items-center gap-2 text-sm md:text-base">
               ⚠️ Especificaciones Técnicas
             </h3>
-            <p className="text-xs md:text-sm text-gray-600">
+            <p className="text-xs md:text-sm text-[#8B8F92]">
               Basado en tabla NEC para conductores de cobre THHN, 75°C y 
               tabla de llenado de conduit al 40% según normativa.
             </p>
           </div>
 
-          <div className="bg-white rounded-xl shadow-md p-4 md:p-6 border border-gray-100">
-            <h3 className="font-semibold text-gray-800 mb-2 flex items-center gap-2 text-sm md:text-base">
+          <div className="bg-[#8B8F92] bg-opacity-10 rounded-xl p-4 md:p-6" style={{boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)'}}>
+            <h3 className="font-semibold text-[#F7B84B] mb-2 flex items-center gap-2 text-sm md:text-base">
               📋 Normativa de Referencia
             </h3>
-            <p className="text-xs md:text-sm text-gray-600">
+            <p className="text-xs md:text-sm text-[#8B8F92]">
               Basado en California Electrical Code (CEC 2022), equivalente a NEC 2020. 
               Consulta siempre la normativa vigente y condiciones específicas de instalación.
             </p>
