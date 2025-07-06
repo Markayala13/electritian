@@ -1,12 +1,45 @@
 import React, { useState, useEffect } from 'react';
 import { FaPlus, FaTrash, FaCalendarAlt } from 'react-icons/fa';
 import ConduitFillCalculator from "./ConduitFillCalculator";
+import { Settings, Thermometer, Calculator, CheckCircle, XCircle } from 'lucide-react';
 
-// Tabla de calibres AWG
-const tablaCalibres = [
+// Tabla de calibres AWG para COBRE 60°C (140°F)
+const tablaCobrre60C = [
   { amperaje: 15, calibre: "14 AWG" },
   { amperaje: 20, calibre: "12 AWG" },
   { amperaje: 30, calibre: "10 AWG" },
+  { amperaje: 40, calibre: "8 AWG" },
+  { amperaje: 55, calibre: "6 AWG" },
+  { amperaje: 70, calibre: "4 AWG" },
+  { amperaje: 85, calibre: "3 AWG" },
+  { amperaje: 95, calibre: "2 AWG" },
+  { amperaje: 110, calibre: "1 AWG" },
+  { amperaje: 125, calibre: "1/0 AWG" },
+  { amperaje: 145, calibre: "2/0 AWG" },
+  { amperaje: 165, calibre: "3/0 AWG" },
+  { amperaje: 195, calibre: "4/0 AWG" },
+  { amperaje: 215, calibre: "250 kcmil" },
+  { amperaje: 240, calibre: "300 kcmil" },
+  { amperaje: 260, calibre: "350 kcmil" },
+  { amperaje: 280, calibre: "400 kcmil" },
+  { amperaje: 320, calibre: "500 kcmil" },
+  { amperaje: 350, calibre: "600 kcmil" },
+  { amperaje: 385, calibre: "700 kcmil" },
+  { amperaje: 400, calibre: "750 kcmil" },
+  { amperaje: 410, calibre: "800 kcmil" },
+  { amperaje: 435, calibre: "900 kcmil" },
+  { amperaje: 455, calibre: "1000 kcmil" },
+  { amperaje: 495, calibre: "1250 kcmil" },
+  { amperaje: 525, calibre: "1500 kcmil" },
+  { amperaje: 545, calibre: "1750 kcmil" },
+  { amperaje: 555, calibre: "2000 kcmil" },
+];
+
+// Tabla de calibres AWG para COBRE 75°C (167°F)
+const tablaCobrre75C = [
+  { amperaje: 20, calibre: "14 AWG" },
+  { amperaje: 25, calibre: "12 AWG" },
+  { amperaje: 35, calibre: "10 AWG" },
   { amperaje: 50, calibre: "8 AWG" },
   { amperaje: 65, calibre: "6 AWG" },
   { amperaje: 85, calibre: "4 AWG" },
@@ -28,96 +61,185 @@ const tablaCalibres = [
   { amperaje: 490, calibre: "800 kcmil" },
   { amperaje: 520, calibre: "900 kcmil" },
   { amperaje: 545, calibre: "1000 kcmil" },
+  { amperaje: 590, calibre: "1250 kcmil" },
+  { amperaje: 625, calibre: "1500 kcmil" },
+  { amperaje: 650, calibre: "1750 kcmil" },
+  { amperaje: 665, calibre: "2000 kcmil" },
 ];
 
-// Componente de Calculadora de Calibre
-function CalculadoraCalibreCable() {
-  const [amperaje, setAmperaje] = useState("");
-  const [resultado, setResultado] = useState("");
-  const [tipoResultado, setTipoResultado] = useState("");
+// Tabla de calibres AWG para COBRE 90°C (194°F)
+const tablaCobrre90C = [
+  { amperaje: 25, calibre: "14 AWG" },
+  { amperaje: 30, calibre: "12 AWG" },
+  { amperaje: 40, calibre: "10 AWG" },
+  { amperaje: 55, calibre: "8 AWG" },
+  { amperaje: 75, calibre: "6 AWG" },
+  { amperaje: 95, calibre: "4 AWG" },
+  { amperaje: 115, calibre: "3 AWG" },
+  { amperaje: 130, calibre: "2 AWG" },
+  { amperaje: 145, calibre: "1 AWG" },
+  { amperaje: 170, calibre: "1/0 AWG" },
+  { amperaje: 195, calibre: "2/0 AWG" },
+  { amperaje: 225, calibre: "3/0 AWG" },
+  { amperaje: 260, calibre: "4/0 AWG" },
+  { amperaje: 290, calibre: "250 kcmil" },
+  { amperaje: 320, calibre: "300 kcmil" },
+  { amperaje: 350, calibre: "350 kcmil" },
+  { amperaje: 380, calibre: "400 kcmil" },
+  { amperaje: 430, calibre: "500 kcmil" },
+  { amperaje: 475, calibre: "600 kcmil" },
+  { amperaje: 520, calibre: "700 kcmil" },
+  { amperaje: 535, calibre: "750 kcmil" },
+  { amperaje: 555, calibre: "800 kcmil" },
+  { amperaje: 585, calibre: "900 kcmil" },
+  { amperaje: 615, calibre: "1000 kcmil" },
+  { amperaje: 665, calibre: "1250 kcmil" },
+  { amperaje: 705, calibre: "1500 kcmil" },
+  { amperaje: 735, calibre: "1750 kcmil" },
+  { amperaje: 750, calibre: "2000 kcmil" },
+];
 
-  const calcular = () => {
-    const amp = parseInt(amperaje, 10);
-    if (isNaN(amp) || amp <= 0) {
-      setResultado("Ingresa un amperaje válido.");
-      setTipoResultado("error");
-      return;
-    }
+// Tabla de calibres AWG para ALUMINIO 60°C (140°F)
+const tablaAluminio60C = [
+  { amperaje: 15, calibre: "12 AWG" },
+  { amperaje: 25, calibre: "10 AWG" },
+  { amperaje: 35, calibre: "8 AWG" },
+  { amperaje: 40, calibre: "6 AWG" },
+  { amperaje: 55, calibre: "4 AWG" },
+  { amperaje: 65, calibre: "3 AWG" },
+  { amperaje: 75, calibre: "2 AWG" },
+  { amperaje: 85, calibre: "1 AWG" },
+  { amperaje: 100, calibre: "1/0 AWG" },
+  { amperaje: 115, calibre: "2/0 AWG" },
+  { amperaje: 130, calibre: "3/0 AWG" },
+  { amperaje: 150, calibre: "4/0 AWG" },
+  { amperaje: 170, calibre: "250 kcmil" },
+  { amperaje: 195, calibre: "300 kcmil" },
+  { amperaje: 210, calibre: "350 kcmil" },
+  { amperaje: 225, calibre: "400 kcmil" },
+  { amperaje: 260, calibre: "500 kcmil" },
+  { amperaje: 285, calibre: "600 kcmil" },
+  { amperaje: 315, calibre: "700 kcmil" },
+  { amperaje: 320, calibre: "750 kcmil" },
+  { amperaje: 330, calibre: "800 kcmil" },
+  { amperaje: 355, calibre: "900 kcmil" },
+  { amperaje: 375, calibre: "1000 kcmil" },
+  { amperaje: 405, calibre: "1250 kcmil" },
+  { amperaje: 435, calibre: "1500 kcmil" },
+  { amperaje: 455, calibre: "1750 kcmil" },
+  { amperaje: 470, calibre: "2000 kcmil" },
+];
 
-    const encontrado = tablaCalibres.find((row) => amp <= row.amperaje);
-    if (encontrado) {
-      setResultado(`Calibre mínimo recomendado: ${encontrado.calibre}`);
-      setTipoResultado("success");
-    } else {
-      setResultado("Amperaje fuera de rango para esta tabla.");
-      setTipoResultado("error");
-    }
-  };
+// Tabla de calibres AWG para ALUMINIO 75°C (167°F)
+const tablaAluminio75C = [
+  { amperaje: 20, calibre: "12 AWG" },
+  { amperaje: 30, calibre: "10 AWG" },
+  { amperaje: 40, calibre: "8 AWG" },
+  { amperaje: 50, calibre: "6 AWG" },
+  { amperaje: 65, calibre: "4 AWG" },
+  { amperaje: 75, calibre: "3 AWG" },
+  { amperaje: 90, calibre: "2 AWG" },
+  { amperaje: 100, calibre: "1 AWG" },
+  { amperaje: 120, calibre: "1/0 AWG" },
+  { amperaje: 135, calibre: "2/0 AWG" },
+  { amperaje: 155, calibre: "3/0 AWG" },
+  { amperaje: 180, calibre: "4/0 AWG" },
+  { amperaje: 205, calibre: "250 kcmil" },
+  { amperaje: 230, calibre: "300 kcmil" },
+  { amperaje: 250, calibre: "350 kcmil" },
+  { amperaje: 270, calibre: "400 kcmil" },
+  { amperaje: 310, calibre: "500 kcmil" },
+  { amperaje: 340, calibre: "600 kcmil" },
+  { amperaje: 375, calibre: "700 kcmil" },
+  { amperaje: 385, calibre: "750 kcmil" },
+  { amperaje: 395, calibre: "800 kcmil" },
+  { amperaje: 425, calibre: "900 kcmil" },
+  { amperaje: 445, calibre: "1000 kcmil" },
+  { amperaje: 485, calibre: "1250 kcmil" },
+  { amperaje: 520, calibre: "1500 kcmil" },
+  { amperaje: 545, calibre: "1750 kcmil" },
+  { amperaje: 560, calibre: "2000 kcmil" },
+];
 
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      calcular();
-    }
-  };
+// Tabla de calibres AWG para ALUMINIO 90°C (194°F)
+const tablaAluminio90C = [
+  { amperaje: 25, calibre: "12 AWG" },
+  { amperaje: 35, calibre: "10 AWG" },
+  { amperaje: 45, calibre: "8 AWG" },
+  { amperaje: 55, calibre: "6 AWG" },
+  { amperaje: 75, calibre: "4 AWG" },
+  { amperaje: 85, calibre: "3 AWG" },
+  { amperaje: 100, calibre: "2 AWG" },
+  { amperaje: 115, calibre: "1 AWG" },
+  { amperaje: 135, calibre: "1/0 AWG" },
+  { amperaje: 150, calibre: "2/0 AWG" },
+  { amperaje: 175, calibre: "3/0 AWG" },
+  { amperaje: 205, calibre: "4/0 AWG" },
+  { amperaje: 230, calibre: "250 kcmil" },
+  { amperaje: 260, calibre: "300 kcmil" },
+  { amperaje: 280, calibre: "350 kcmil" },
+  { amperaje: 305, calibre: "400 kcmil" },
+  { amperaje: 350, calibre: "500 kcmil" },
+  { amperaje: 385, calibre: "600 kcmil" },
+  { amperaje: 425, calibre: "700 kcmil" },
+  { amperaje: 435, calibre: "750 kcmil" },
+  { amperaje: 445, calibre: "800 kcmil" },
+  { amperaje: 480, calibre: "900 kcmil" },
+  { amperaje: 500, calibre: "1000 kcmil" },
+  { amperaje: 545, calibre: "1250 kcmil" },
+  { amperaje: 585, calibre: "1500 kcmil" },
+  { amperaje: 615, calibre: "1750 kcmil" },
+  { amperaje: 630, calibre: "2000 kcmil" },
+];
 
-  const getResultIcon = () => {
-    switch (tipoResultado) {
-      case "success":
-        return "✅";
-      case "error":
-        return "❌";
-      default:
-        return "⚠️";
-    }
-  };
+// Organización de tablas por material y temperatura
+const tablasConductores = {
+  cobre: {
+    "60": tablaCobrre60C,
+    "75": tablaCobrre75C,
+    "90": tablaCobrre90C
+  },
+  aluminio: {
+    "60": tablaAluminio60C,
+    "75": tablaAluminio75C,
+    "90": tablaAluminio90C
+  }
+};
 
-  const getResultStyle = () => {
-    switch (tipoResultado) {
-      case "success":
-        return "bg-[#5ED36A] bg-opacity-20 border-[#5ED36A] text-[#FFFFFF]";
-      case "error":
-        return "bg-[#9E5CBD] bg-opacity-20 border-[#9E5CBD] text-[#FFFFFF]";
-      default:
-        return "bg-[#F7B84B] bg-opacity-20 border-[#F7B84B] text-[#FFFFFF]";
-    }
-  };
+// Información de tipos de conductores
+const tiposConductores = {
+  "60": {
+    temperatura: "60°C (140°F)",
+    tipos: "TW, UF",
+    descripcion: "Aplicaciones básicas, ambientes húmedos"
+  },
+  "75": {
+    temperatura: "75°C (167°F)",
+    tipos: "THHN, THWN, XHHW",
+    descripcion: "Uso general, más común en instalaciones"
+  },
+  "90": {
+    temperatura: "90°C (194°F)",
+    tipos: "THHN, THWN-2, XHHW-2",
+    descripcion: "Condiciones secas, máxima capacidad"
+  }
+};
 
-  return (
-    <div className="space-y-6">
-      <div className="space-y-4">
-        <label className="block text-sm font-semibold text-[#FFFFFF]">
-          Amperaje Requerido (A)
-        </label>
-        <div className="relative">
-          <input
-            type="number"
-            min="1"
-            value={amperaje}
-            onChange={(e) => setAmperaje(e.target.value)}
-            onKeyPress={handleKeyPress}
-            placeholder="Ingresa el amperaje"
-            className="w-full px-4 py-4 text-lg border-2 border-[#8B8F92] bg-[#5E6468] text-[#FFFFFF] rounded-xl focus:border-[#F7B84B] focus:ring-4 focus:ring-[#F7B84B] focus:ring-opacity-20 transition-all duration-200 outline-none pl-12 placeholder-[#8B8F92]"
-          />
-          <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[#F7B84B]">⚡</span>
-        </div>
-      </div>
+// Información de materiales
+const tiposMateriales = {
+  cobre: {
+    nombre: "Cobre",
+    icono: "🟤",
+    descripcion: "Conductividad superior, uso residencial y comercial"
+  },
+  aluminio: {
+    nombre: "Aluminio",
+    icono: "🔘",
+    descripcion: "Económico, uso industrial y servicios eléctricos"
+  }
+};
 
-      <button
-        onClick={calcular}
-        className="w-full bg-[#F7B84B] text-[#000000] font-bold py-4 px-6 rounded-xl hover:bg-[#F7B84B] hover:opacity-90 focus:ring-4 focus:ring-[#F7B84B] focus:ring-opacity-20 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center gap-2"
-      >
-        🧮 Calcular Calibre
-      </button>
-
-      {resultado && (
-        <div className={`p-4 rounded-xl border-2 flex items-center gap-3 ${getResultStyle()}`}>
-          <span>{getResultIcon()}</span>
-          <span className="font-semibold text-[#FFFFFF]">{resultado}</span>
-        </div>
-      )}
-    </div>
-  );
-}
+// Componente de Calculadora de Calibre removido - ahora está integrado en ZonaPrivada
 
 // Componente de Tutoriales
 function ComponenteTutoriales() {
@@ -887,6 +1009,40 @@ function ComponenteTutoriales() {
 // Componente principal
 const ZonaPrivada = () => {
   const [calculadoraActiva, setCalculadoraActiva] = useState("calibre");
+  
+  // Estados para la calculadora de calibre
+  const [amperaje, setAmperaje] = useState("");
+  const [materialSeleccionado, setMaterialSeleccionado] = useState("cobre");
+  const [temperaturaSeleccionada, setTemperaturaSeleccionada] = useState("75");
+  const [resultado, setResultado] = useState("");
+  const [tipoResultado, setTipoResultado] = useState("");
+
+  // Seleccionar tabla según material y temperatura
+  const getTablaActual = () => {
+    return tablasConductores[materialSeleccionado][temperaturaSeleccionada];
+  };
+
+  // Función para calcular calibre
+  const calcular = () => {
+    const amp = parseInt(amperaje, 10);
+    if (isNaN(amp) || amp <= 0) {
+      setResultado("Ingresa un amperaje válido.");
+      setTipoResultado("error");
+      return;
+    }
+
+    const tablaActual = getTablaActual();
+    const encontrado = tablaActual.find((row) => amp <= row.amperaje);
+    if (encontrado) {
+      const infoTemperatura = tiposConductores[temperaturaSeleccionada];
+      const infoMaterial = tiposMateriales[materialSeleccionado];
+      setResultado(`Calibre mínimo: ${encontrado.calibre} ${infoMaterial.nombre} (${infoTemperatura.temperatura})`);
+      setTipoResultado("success");
+    } else {
+      setResultado("Amperaje fuera de rango para esta tabla.");
+      setTipoResultado("error");
+    }
+  };
 
   useEffect(() => {
     document.documentElement.classList.add('dark');
@@ -955,19 +1111,105 @@ const ZonaPrivada = () => {
         {/* Herramienta Activa */}
         <div className="mb-10 md:mb-12">
           {calculadoraActiva === "calibre" ? (
-            <div className="bg-[#8B8F92] bg-opacity-10 rounded-xl p-6 md:p-10 mb-8" style={{boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)'}}>
-              <div className="text-center mb-8">
-                <div className="inline-flex items-center justify-center w-14 h-14 md:w-20 md:h-20 bg-[#28ACA6] rounded-full mb-5">
-                  <span className="text-2xl md:text-3xl text-[#FFFFFF]">⚡</span>
+            <div className="bg-transparent rounded-2xl shadow-xl p-8 border border-gray-100">
+              <div className="space-y-6">
+                {/* Material Selector */}
+                <div className="space-y-4">
+                  <label className="block text-base font-semibold text-white flex items-center gap-2">
+                    <Settings className="w-5 h-5 text-[#FFD700]" />
+                    Material del Conductor
+                  </label>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {Object.entries(tiposMateriales).map(([key, info]) => (
+                      <div
+                        key={key}
+                        className={`p-4 rounded-xl border-2 cursor-pointer transition-all duration-200 ${
+                          materialSeleccionado === key
+                            ? "border-[#FFD700] bg-[#FFD700] bg-opacity-20"
+                            : "border-gray-300 hover:border-[#FFD700] hover:bg-[#FFD700] hover:bg-opacity-10"
+                        }`}
+                        onClick={() => setMaterialSeleccionado(key)}
+                      >
+                        <div className="text-center">
+                          <div className="text-lg font-bold text-white">{info.nombre}</div>
+                          <div className="text-sm text-[#00BFA6] font-semibold mt-1">{info.descripcion}</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <h2 className="text-2xl md:text-3xl font-extrabold text-[#F7B84B] mb-3 tracking-wider">
-                  Calculadora de Calibre de Cable
-                </h2>
-                <p className="text-[#8B8F92] text-base md:text-lg mb-2 font-medium">
-                  Encuentra el calibre mínimo según el amperaje requerido
-                </p>
+
+                {/* Temperature Selector */}
+                <div className="space-y-4">
+                  <label className="block text-base font-semibold text-white flex items-center gap-2">
+                    <Thermometer className="w-5 h-5 text-[#FFD700]" />
+                    Temperatura del Conductor
+                  </label>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    {Object.entries(tiposConductores).map(([key, info]) => (
+                      <div
+                        key={key}
+                        className={`p-4 rounded-xl border-2 cursor-pointer transition-all duration-200 ${
+                          temperaturaSeleccionada === key
+                            ? "border-[#FFD700] bg-[#FFD700] bg-opacity-20"
+                            : "border-gray-300 hover:border-[#FFD700] hover:bg-[#FFD700] hover:bg-opacity-10"
+                        }`}
+                        onClick={() => setTemperaturaSeleccionada(key)}
+                      >
+                        <div className="text-center">
+                          <div className="text-lg font-bold text-white">{info.temperatura}</div>
+                          <div className="text-sm text-[#00BFA6] font-semibold mt-1">{info.tipos}</div>
+                          <div className="text-xs text-gray-400 mt-1">{info.descripcion}</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Calculadora */}
+                <div className="space-y-4">
+                  <label className="block text-base font-semibold text-white flex items-center gap-2">
+                    <Calculator className="w-5 h-5 text-[#FFD700]" />
+                    Amperaje del Circuito
+                  </label>
+                  <div className="text-sm text-[#B0B8C1] mb-2">
+                    Basado en valores de {tiposMateriales[materialSeleccionado].nombre} {tiposConductores[temperaturaSeleccionada].temperatura} según NEC Tabla 310.16
+                  </div>
+                  <div className="relative">
+                    <input
+                      type="number"
+                      value={amperaje}
+                      onChange={(e) => setAmperaje(e.target.value)}
+                      className="w-full p-4 text-lg border-2 border-gray-300 rounded-lg bg-[#181C23] text-white focus:border-[#FFD700] focus:outline-none"
+                      placeholder="Ingresa el amperaje requerido"
+                    />
+                    <button
+                      onClick={calcular}
+                      className="absolute right-2 top-2 p-2 bg-[#FFD700] text-[#181C23] rounded-lg hover:bg-[#E6C200] transition-colors"
+                    >
+                      <Calculator className="w-6 h-6" />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Resultado */}
+                {resultado && (
+                  <div className={`p-4 rounded-lg border-2 ${
+                    tipoResultado === "success" 
+                      ? "border-green-500 bg-green-500 bg-opacity-20" 
+                      : "border-red-500 bg-red-500 bg-opacity-20"
+                  }`}>
+                    <div className="flex items-center gap-2">
+                      {tipoResultado === "success" ? (
+                        <CheckCircle className="w-5 h-5 text-green-400" />
+                      ) : (
+                        <XCircle className="w-5 h-5 text-red-400" />
+                      )}
+                      <span className="text-white font-semibold">{resultado}</span>
+                    </div>
+                  </div>
+                )}
               </div>
-              <CalculadoraCalibreCable />
             </div>
           ) : calculadoraActiva === "conduit" ? (
             <div className="bg-[#8B8F92] bg-opacity-10 rounded-xl p-6 md:p-10 mb-8" style={{boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)'}}>
