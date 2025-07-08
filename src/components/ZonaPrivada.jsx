@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaPlus, FaTrash, FaCalendarAlt } from 'react-icons/fa';
 import ConduitFillCalculator from "./ConduitFillCalculator";
+import CalculadoraGrounding from "./CalculadoraGrounding";
 import { Settings, Thermometer, Calculator, CheckCircle, XCircle, Zap } from 'lucide-react';
 
 // Tabla de calibres AWG para COBRE 60°C (140°F)
@@ -1098,6 +1099,16 @@ const ZonaPrivada = () => {
                 🔧 Llenado de Conduit
               </button>
               <button
+                onClick={() => setCalculadoraActiva("grounding")}
+                className={`flex-1 px-3 py-3 md:px-6 md:py-3 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 whitespace-nowrap text-xs md:text-base ${
+                  calculadoraActiva === "grounding"
+                    ? "bg-[#F7B84B] text-[#000000]"
+                    : "text-[#8B8F92] font-regular"
+                }`}
+              >
+                🛡️ Grounding
+              </button>
+              <button
                 onClick={() => setCalculadoraActiva("tutoriales")}
                 className={`flex-1 px-3 py-3 md:px-6 md:py-3 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 whitespace-nowrap text-xs md:text-base ${
                   calculadoraActiva === "tutoriales"
@@ -1563,6 +1574,21 @@ const ZonaPrivada = () => {
               </div>
               <ConduitFillCalculator />
             </div>
+          ) : calculadoraActiva === "grounding" ? (
+            <div className="bg-[#8B8F92] bg-opacity-10 rounded-xl p-6 md:p-10 mb-8" style={{boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)'}}>
+              <div className="text-center mb-8">
+                <div className="inline-flex items-center justify-center w-14 h-14 md:w-20 md:h-20 bg-[#10B981] rounded-full mb-5">
+                  <span className="text-2xl md:text-3xl text-[#FFFFFF]">🛡️</span>
+                </div>
+                <h2 className="text-2xl md:text-3xl font-extrabold text-[#F7B84B] mb-3 tracking-wider">
+                  Calculadora de Grounding (Tierra)
+                </h2>
+                <p className="text-[#8B8F92] text-base md:text-lg mb-2 font-medium">
+                  NEC 2023 Table 250.122 - Seguridad Crítica
+                </p>
+              </div>
+              <CalculadoraGrounding />
+            </div>
           ) : calculadoraActiva === "tutoriales" ? (
             <div className="bg-[#8B8F92] bg-opacity-10 rounded-xl p-6 md:p-10 mb-8" style={{boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)'}}>
               <div className="text-center mb-8">
@@ -1612,7 +1638,7 @@ const ZonaPrivada = () => {
               📋 Normativa de Referencia
             </h3>
             <p className="text-xs md:text-sm text-[#8B8F92]">
-              Basado en California Electrical Code (CEC 2022), equivalente a NEC 2020. 
+              Basado en NEC 2023 (National Electrical Code). 
               Consulta siempre la normativa vigente y condiciones específicas de instalación.
             </p>
           </div>

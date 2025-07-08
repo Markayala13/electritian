@@ -272,14 +272,14 @@ const ConduitFillCalculator = () => {
           🟢 EMT ✅ • 🔵 Rigid Steel ✅ • 🟠 PVC Sch 40 ✅ • 🔴 PVC Sch 80 ✅ • 🟦 LFNC ✅ • 🟣 FMC ✅ • 🟫 LFMC ✅
         </p>
         <p className="text-xs md:text-sm text-[#B0B8C1] mt-2">
-          Basado en NEC 2023 - Código Eléctrico de California (ACTUALIZADO)
+          Basado en NEC 2023 - National Electrical Code (ACTUALIZADO)
         </p>
       </div>
 
       {/* Type Selection Highlight - Responsive */}
       <div className="bg-gradient-to-r from-yellow-400 to-orange-500 rounded-xl p-3 md:p-4 mb-6 text-center">
         <h2 className="text-lg md:text-xl font-bold text-white mb-2">🔧 SELECCIONA TU TIPO DE CONDUIT/TUBO</h2>
-        <p className="text-white text-sm md:text-base">Cada tipo tiene diferentes capacidades según NEC California</p>
+        <p className="text-white text-sm md:text-base">Cada tipo tiene diferentes capacidades según NEC 2023</p>
       </div>
 
       {/* Calculator Section - Responsive Grid */}
@@ -399,6 +399,56 @@ const ConduitFillCalculator = () => {
         </div>
       </div>
 
+      {/* Technical References Section */}
+      <div className="bg-gradient-to-r from-purple-600 to-indigo-600 rounded-xl p-4 md:p-6 mb-6 text-white">
+        <h3 className="text-lg md:text-xl font-semibold mb-4 flex items-center">
+          📚 Referencias Técnicas del NEC 2023
+        </h3>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <div className="bg-white/10 rounded-lg p-4">
+            <h4 className="font-bold text-yellow-300 mb-2">📊 Fuentes de Datos</h4>
+            <ul className="text-sm space-y-1">
+              <li>• <strong>Chapter 9, Table 4:</strong> Áreas de conduits disponibles</li>
+              <li>• <strong>Chapter 9, Table 5:</strong> Áreas de conductores</li>
+              <li>• <strong>Section 300.17:</strong> Reglas de porcentaje de llenado</li>
+            </ul>
+          </div>
+          
+          <div className="bg-white/10 rounded-lg p-4">
+            <h4 className="font-bold text-yellow-300 mb-2">🧮 Cálculo Utilizado</h4>
+            <div className="text-sm space-y-1">
+              <div><strong>Fórmula:</strong> Área Conduit ÷ Área Conductor = Máx. Conductores</div>
+              <div><strong>Ejemplo:</strong> 0.346 in² ÷ 0.0133 in² = 26 conductores</div>
+            </div>
+          </div>
+        </div>
+        
+        <div className="bg-white/10 rounded-lg p-4">
+          <h4 className="font-bold text-yellow-300 mb-3">❓ ¿Por qué el 40%?</h4>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+            <div className="text-center">
+              <div className="text-lg font-bold text-blue-200">1 Conductor</div>
+              <div className="text-xs">53% máximo</div>
+              <div className="text-xs opacity-80">Poco calor generado</div>
+            </div>
+            <div className="text-center border-l border-r border-white/20 px-2">
+              <div className="text-lg font-bold text-red-200">2 Conductores</div>
+              <div className="text-xs">31% máximo</div>
+              <div className="text-xs opacity-80">Más restrictivo (fase-neutro alta corriente)</div>
+            </div>
+            <div className="text-center">
+              <div className="text-lg font-bold text-green-200">3+ Conductores</div>
+              <div className="text-xs">40% máximo</div>
+              <div className="text-xs opacity-80">Circuitos balanceados (lo más común)</div>
+            </div>
+          </div>
+          <div className="mt-3 text-xs text-center opacity-90">
+            <strong>Razón:</strong> Múltiples conductores generan calor. El 40% asegura suficiente espacio para ventilación y previene sobrecalentamiento.
+          </div>
+        </div>
+      </div>
+
       {/* Comparison Table - Scroll horizontal en mobile */}
       <div className="bg-gray-900/90 rounded-2xl p-3 md:p-6 mb-8 shadow-xl overflow-x-auto">
         <h3 className="text-lg md:text-xl font-semibold mb-4 text-blue-100">
@@ -442,25 +492,15 @@ const ConduitFillCalculator = () => {
 
       {/* Notes - Texto más pequeño en mobile */}
       <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 md:p-6 rounded-r-xl">
-        <h3 className="font-semibold text-yellow-800 mb-3 text-sm md:text-base">⚠️ Notas Importantes del NEC California:</h3>
+        <h3 className="font-semibold text-yellow-800 mb-3 text-sm md:text-base">⚠️ Notas Importantes del NEC 2023:</h3>
         <ul className="text-xs md:text-sm text-yellow-700 space-y-1 md:space-y-2">
-          <li>• <strong>40% de llenado</strong> para 3 o más conductores del mismo tipo</li>
-          <li>• <strong>31% de llenado</strong> para exactamente 2 conductores</li>
-          <li>• <strong>53% de llenado</strong> para 1 solo conductor</li>
-          <li>• Los niples de máximo 24" pueden llenarse al <strong>60%</strong></li>
-          <li>• 🟢 <strong>EMT:</strong> Uso interior/exterior ligero, fácil instalación ✅ ACTUALIZADO</li>
-          <li>• 🔵 <strong>Rigid Steel:</strong> Máxima protección mecánica, áreas industriales ✅ ACTUALIZADO</li>
-          <li>• 🟠 <strong>PVC Sch 40:</strong> Enterrado directo, uso general económico ✅ ACTUALIZADO - ERRORES CRÍTICOS CORREGIDOS</li>
-          <li>• 🔴 <strong>PVC Sch 80:</strong> Alto daño físico, pared más gruesa ✅ ACTUALIZADO</li>
-          <li>• Siempre verificar con la autoridad local (AHJ) antes de la instalación</li>
-          <li>• ✅ Datos 100% verificados y actualizados según NEC 2023 Chapter 9 Tables 4 y 5</li>
-          <li>• 🆕 Nuevos calibres agregados: 600, 700, 750, 800, 900, 1000 kcmil</li>
-          <li>• 🆕 XHHW incluye hasta 2000 kcmil para aplicaciones industriales</li>
-          <li>• 🚨 PVC Sch 40: ERRORES CRÍTICOS corregidos - algunos valores tenían hasta 33% más capacidad de la real</li>
-          <li>• 🚨 PVC Sch 80: ERRORES corregidos - valores de tamaños grandes tenían hasta 20% más capacidad de la real</li>
-          <li>• 🟦 <strong>Liquidtight Flexible Nonmetallic (LFNC):</strong> Flexible, resistente al agua, tamaños 3/8" a 2" ✅ ACTUALIZADO</li>
-          <li>• 🚨 LFNC: Corregidos todos los valores + agregado tamaño 3/8" que faltaba</li>
-          <li>• 🎉 TIPOS PRINCIPALES 100% ACTUALIZADOS: EMT, Rigid Steel, PVC Sch 40, PVC Sch 80, LFNC</li>
+          <li>• <strong>40% de llenado máximo</strong> para 3 o más conductores (caso más común)</li>
+          <li>• <strong>31% de llenado máximo</strong> para exactamente 2 conductores</li>
+          <li>• <strong>53% de llenado máximo</strong> para 1 solo conductor</li>
+          <li>• <strong>Niples de 24" o menos</strong> pueden llenarse al 60%</li>
+          <li>• <strong>Siempre verificar con inspección local (AHJ)</strong> antes de instalar</li>
+          <li>• <strong>Usar cable de tamaño adecuado</strong> - conduit más grande no significa cable más pequeño</li>
+          <li>• <strong>Dejar cable extra</strong> para futuras conexiones o cambios</li>
         </ul>
       </div>
     </div>
