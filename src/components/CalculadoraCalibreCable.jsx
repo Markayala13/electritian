@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Zap, Calculator, AlertTriangle, CheckCircle, XCircle, Thermometer, Settings } from "lucide-react";
+import { Zap, Calculator } from "lucide-react";
 
 // Tabla de calibres AWG para COBRE 60°C (140°F)
 const tablaCobrre60C = [
@@ -192,59 +192,47 @@ const tablaAluminio90C = [
 
 // Organización de tablas por material y temperatura
 const tablasConductores = {
-  cobre: {
+  copper: {
     "60": tablaCobrre60C,
     "75": tablaCobrre75C,
     "90": tablaCobrre90C
   },
-  aluminio: {
+  aluminum: {
     "60": tablaAluminio60C,
     "75": tablaAluminio75C,
     "90": tablaAluminio90C
   }
 };
 
-// Información de tipos de conductores
-const tiposConductores = {
-  "60": {
-    temperatura: "60°C (140°F)",
-    tipos: "TW, UF",
-    descripcion: "Aplicaciones básicas, ambientes húmedos"
-  },
-  "75": {
-    temperatura: "75°C (167°F)",
-    tipos: "THHN, THWN, XHHW",
-    descripcion: "Uso general, más común en instalaciones"
-  },
-  "90": {
-    temperatura: "90°C (194°F)",
-    tipos: "THHN, THWN-2, XHHW-2",
-    descripcion: "Condiciones secas, máxima capacidad"
-  }
-};
-
 // Información de materiales
 const tiposMateriales = {
-  cobre: {
-    nombre: "Cobre",
-    icono: "🟤",
-    descripcion: "Conductividad superior, uso residencial y comercial",
-    ventajas: ["Mayor conductividad", "Más flexible", "Resistente a corrosión"]
+  copper: {
+    nombre: "Copper",
+    descripcion: "Copper is the standard material for electrical wiring due to its excellent conductivity and durability.",
+    imagen: "https://images.unsplash.com/photo-1582139329536-e7284fece509?w=500&h=300&fit=crop"
   },
-  aluminio: {
-    nombre: "Aluminio",
-    icono: "🔘",
-    descripcion: "Económico, uso industrial y servicios eléctricos",
-    ventajas: ["Más económico", "Más liviano", "Ideal para grandes instalaciones"]
+  aluminum: {
+    nombre: "Aluminum", 
+    descripcion: "Aluminum is a lighter and more cost-effective alternative to copper, suitable for larger gauge wires.",
+    imagen: "https://images.unsplash.com/photo-1535082783524-2fde8d3d8e6d?w=500&h=300&fit=crop"
   }
 };
 
+// Calibres más comunes para la tabla de referencia
+const calibresComunes = [
+  { calibre: "14 AWG", amperaje: "15 Amps" },
+  { calibre: "12 AWG", amperaje: "20 Amps" },
+  { calibre: "10 AWG", amperaje: "30 Amps" },
+  { calibre: "8 AWG", amperaje: "40 Amps" },
+  { calibre: "6 AWG", amperaje: "55 Amps" },
+  { calibre: "4 AWG", amperaje: "70 Amps" },
+];
+
 export default function CalculadoraCalibreCable() {
-  const [amperaje, setAmperaje] = useState("");
-  const [materialSeleccionado, setMaterialSeleccionado] = useState("cobre");
+  const [materialSeleccionado, setMaterialSeleccionado] = useState("copper");
   const [temperaturaSeleccionada, setTemperaturaSeleccionada] = useState("75");
+  const [amperaje, setAmperaje] = useState("");
   const [resultado, setResultado] = useState("");
-  const [tipoResultado, setTipoResultado] = useState("");
 
   // Seleccionar tabla según material y temperatura
   const getTablaActual = () => {
@@ -254,21 +242,16 @@ export default function CalculadoraCalibreCable() {
   const calcular = () => {
     const amp = parseInt(amperaje, 10);
     if (isNaN(amp) || amp <= 0) {
-      setResultado("Ingresa un amperaje válido.");
-      setTipoResultado("error");
+      setResultado("Enter valid amperage");
       return;
     }
 
     const tablaActual = getTablaActual();
     const encontrado = tablaActual.find((row) => amp <= row.amperaje);
     if (encontrado) {
-      const infoTemperatura = tiposConductores[temperaturaSeleccionada];
-      const infoMaterial = tiposMateriales[materialSeleccionado];
-      setResultado(`Calibre mínimo: ${encontrado.calibre} ${infoMaterial.nombre} (${infoTemperatura.temperatura})`);
-      setTipoResultado("success");
+      setResultado(`You need ${encontrado.calibre} ${materialSeleccionado} wire`);
     } else {
-      setResultado("Amperaje fuera de rango para esta tabla.");
-      setTipoResultado("error");
+      setResultado("Amperage out of range for this table");
     }
   };
 
@@ -278,185 +261,164 @@ export default function CalculadoraCalibreCable() {
     }
   };
 
-  const getResultIcon = () => {
-    switch (tipoResultado) {
-      case "success":
-        return <CheckCircle className="w-5 h-5 text-green-500" />;
-      case "error":
-        return <XCircle className="w-5 h-5 text-red-500" />;
-      default:
-        return <AlertTriangle className="w-5 h-5 text-yellow-500" />;
-    }
-  };
-
-  const getResultStyle = () => {
-    switch (tipoResultado) {
-      case "success":
-        return "bg-green-50 border-green-200 text-green-800";
-      case "error":
-        return "bg-red-50 border-red-200 text-red-800";
-      default:
-        return "bg-yellow-50 border-yellow-200 text-yellow-800";
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-transparent p-4">
-      <div className="max-w-2xl mx-auto">
+    <div className="relative flex size-full min-h-screen flex-col bg-[#23272F] justify-between">
+      {/* TÍTULO TEMPORAL PARA VERIFICAR CAMBIOS */}
+      <div className="bg-red-500 text-white text-center p-4 text-2xl font-bold">
+        🚨 NUEVO DISEÑO CARGADO - SI VES ESTO, FUNCIONÓ 🚨
+      </div>
+      
+      <div>
         {/* Header */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full mb-4 shadow-lg">
-            <Zap className="w-8 h-8 text-white" />
-          </div>
-          <h1 className="text-3xl font-bold text-white mb-2">
-            Calculadora de Calibre de Cable
-          </h1>
-          <p className="text-[#B0B8C1]">
-            Encuentra el calibre mínimo según el amperaje requerido
-          </p>
-        </div>
-
-        {/* Main Calculator Card */}
-        <div className="bg-transparent rounded-2xl shadow-xl p-8 mb-6 border border-gray-100">
-          <div className="space-y-6">
-            {/* Material Selector */}
-            <div className="space-y-4">
-              <label className="block text-base font-semibold text-white flex items-center gap-2">
-                <Settings className="w-5 h-5 text-[#FFD700]" />
-                Material del Conductor
-              </label>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {Object.entries(tiposMateriales).map(([key, info]) => (
-                  <div
-                    key={key}
-                    className={`p-4 rounded-xl border-2 cursor-pointer transition-all duration-200 ${
-                      materialSeleccionado === key
-                        ? "border-[#FFD700] bg-[#FFD700] bg-opacity-20"
-                        : "border-gray-300 hover:border-[#FFD700] hover:bg-[#FFD700] hover:bg-opacity-10"
-                    }`}
-                    onClick={() => setMaterialSeleccionado(key)}
-                  >
-                    <div className="text-center">
-                      <div className="text-lg font-bold text-white">{info.nombre}</div>
-                      <div className="text-sm text-[#00BFA6] font-semibold mt-1">{info.descripcion}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Temperature Selector */}
-            <div className="space-y-4">
-              <label className="block text-base font-semibold text-white flex items-center gap-2">
-                <Thermometer className="w-5 h-5 text-[#FFD700]" />
-                Rango de Temperatura del Conductor
-              </label>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {Object.entries(tiposConductores).map(([key, info]) => (
-                  <div
-                    key={key}
-                    className={`p-4 rounded-xl border-2 cursor-pointer transition-all duration-200 ${
-                      temperaturaSeleccionada === key
-                        ? "border-[#FFD700] bg-[#FFD700] bg-opacity-20"
-                        : "border-gray-300 hover:border-[#FFD700] hover:bg-[#FFD700] hover:bg-opacity-10"
-                    }`}
-                    onClick={() => setTemperaturaSeleccionada(key)}
-                  >
-                    <div className="text-center">
-                      <div className="text-lg font-bold text-white">{info.temperatura}</div>
-                      <div className="text-sm text-[#00BFA6] font-semibold mt-1">{info.tipos}</div>
-                      <div className="text-xs text-[#B0B8C1] mt-2">{info.descripcion}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Input Section */}
-            <div className="space-y-4">
-              <label className="block text-base font-semibold text-white">
-                Amperaje Requerido (A)
-              </label>
-              <div className="text-sm text-[#B0B8C1] mb-2">
-                Basado en valores de {tiposMateriales[materialSeleccionado].nombre} {tiposConductores[temperaturaSeleccionada].temperatura} según NEC Tabla 310.16
-              </div>
-              <div className="relative">
-                <input
-                  type="number"
-                  min="1"
-                  value={amperaje}
-                  onChange={(e) => setAmperaje(e.target.value)}
-                  onKeyPress={handleKeyPress}
-                  placeholder="Ingresa el amperaje"
-                  className="w-full px-4 py-4 text-lg border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 outline-none pl-12 bg-[#23272F] text-white placeholder-gray-400"
-                />
-                <Zap className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-[#FFD700]" />
-              </div>
-            </div>
-
-            {/* Calculate Button */}
-            <button
-              onClick={calcular}
-              className="w-full bg-gradient-to-r from-blue-500 to-[#00BFA6] text-white font-bold py-4 px-6 rounded-xl hover:from-blue-600 hover:to-[#00BFA6] focus:ring-4 focus:ring-blue-100 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center gap-2"
-            >
-              <Calculator className="w-5 h-5" />
-              Calcular Calibre
+        <div className="flex items-center bg-[#23272F] p-4 pb-2 justify-between">
+          <h2 className="text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pl-12">
+            Cable Size Calculator
+          </h2>
+          <div className="flex w-12 items-center justify-end">
+            <button className="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 bg-transparent text-white gap-2 text-base font-bold leading-normal tracking-[0.015em] min-w-0 p-0">
+              <Zap className="w-6 h-6 text-[#FFD700]" />
             </button>
-
-            {/* Result Section */}
-            {resultado && (
-              <div className={`p-4 rounded-xl border-2 flex items-center gap-3 ${getResultStyle()}`}>
-                {getResultIcon()}
-                <span className="font-semibold text-white">{resultado}</span>
-              </div>
-            )}
           </div>
         </div>
 
-        {/* Information Cards */}
-        <div className="grid gap-4 mb-6">
-          <div className="bg-transparent rounded-xl shadow-md p-6 border border-gray-100">
-            <h3 className="font-semibold text-white mb-2 flex items-center gap-2">
-              <AlertTriangle className="w-5 h-5 text-amber-500" />
-              Material Seleccionado: {tiposMateriales[materialSeleccionado].nombre}
-            </h3>
-            <p className="text-[#B0B8C1] mb-2">
-              {tiposMateriales[materialSeleccionado].descripcion}
-            </p>
-            <div className="text-sm text-[#00BFA6]">
-              <strong>Ventajas:</strong> {tiposMateriales[materialSeleccionado].ventajas.join(", ")}
+        {/* Material Selection */}
+        <h2 className="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
+          Material
+        </h2>
+        <div className="flex flex-wrap gap-3 p-4">
+          {Object.entries(tiposMateriales).map(([key, info]) => (
+            <label
+              key={key}
+              className={`text-sm font-medium leading-normal flex items-center justify-center rounded-xl border px-4 h-11 text-white cursor-pointer transition-all duration-200 ${
+                materialSeleccionado === key
+                  ? "border-[3px] border-[#FFD700] px-3.5"
+                  : "border border-[#B0B8C1] hover:border-[#FFD700]"
+              }`}
+            >
+              {info.nombre}
+              <input
+                type="radio"
+                className="invisible absolute"
+                name="material"
+                value={key}
+                checked={materialSeleccionado === key}
+                onChange={(e) => setMaterialSeleccionado(e.target.value)}
+              />
+            </label>
+          ))}
+        </div>
+
+        {/* Temperature Selection */}
+        <h2 className="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
+          Temperature
+        </h2>
+        <div className="flex flex-wrap gap-3 p-4">
+          {["60", "75", "90"].map((temp) => (
+            <label
+              key={temp}
+              className={`text-sm font-medium leading-normal flex items-center justify-center rounded-xl border px-4 h-11 text-white cursor-pointer transition-all duration-200 ${
+                temperaturaSeleccionada === temp
+                  ? "border-[3px] border-[#FFD700] px-3.5"
+                  : "border border-[#B0B8C1] hover:border-[#FFD700]"
+              }`}
+            >
+              {temp}°C
+              <input
+                type="radio"
+                className="invisible absolute"
+                name="temperature"
+                value={temp}
+                checked={temperaturaSeleccionada === temp}
+                onChange={(e) => setTemperaturaSeleccionada(e.target.value)}
+              />
+            </label>
+          ))}
+        </div>
+
+        {/* Amperage Input */}
+        <h2 className="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
+          Amperage
+        </h2>
+        <div className="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+          <label className="flex flex-col min-w-40 flex-1">
+            <input
+              type="number"
+              placeholder="Enter Amperage"
+              className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-white focus:outline-0 focus:ring-0 border border-[#B0B8C1] bg-[#181C23] focus:border-[#FFD700] h-14 placeholder:text-[#B0B8C1] p-[15px] text-base font-normal leading-normal"
+              value={amperaje}
+              onChange={(e) => setAmperaje(e.target.value)}
+              onKeyPress={handleKeyPress}
+            />
+          </label>
+        </div>
+
+        {/* Calculate Button */}
+        <div className="flex px-4 py-3">
+          <button
+            onClick={calcular}
+            className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-5 flex-1 bg-[#FFD700] text-[#23272F] text-base font-bold leading-normal tracking-[0.015em] hover:bg-[#E6C200] transition-colors duration-200"
+          >
+            <Calculator className="w-5 h-5 mr-2" />
+            <span className="truncate">CALCULATE GAUGE</span>
+          </button>
+        </div>
+
+        {/* Result */}
+        {resultado && (
+          <p className="text-white text-base font-normal leading-normal pb-3 pt-1 px-4 text-center">
+            {resultado}
+          </p>
+        )}
+
+        {/* Material Information */}
+        <h2 className="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
+          Material Information
+        </h2>
+        
+        {Object.entries(tiposMateriales).map(([key, info]) => (
+          <div key={key} className="p-4">
+            <div
+              className="bg-cover bg-center flex flex-col items-stretch justify-end rounded-xl pt-[132px]"
+              style={{
+                backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%), url("${info.imagen}")`
+              }}
+            >
+              <div className="flex w-full items-end justify-between gap-4 p-4">
+                <div className="flex max-w-[440px] flex-1 flex-col gap-1">
+                  <p className="text-white tracking-light text-2xl font-bold leading-tight max-w-[440px]">
+                    {info.nombre}
+                  </p>
+                  <p className="text-white text-base font-medium leading-normal">
+                    {info.descripcion}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
+        ))}
+      </div>
 
-          <div className="bg-transparent rounded-xl shadow-md p-6 border border-gray-100">
-            <h3 className="font-semibold text-white mb-2 flex items-center gap-2">
-              <AlertTriangle className="w-5 h-5 text-blue-500" />
-              Especificaciones Técnicas
-            </h3>
-            <p className="text-[#B0B8C1]">
-              Basado en tabla NEC 310.16 para conductores de {materialSeleccionado} a {tiposConductores[temperaturaSeleccionada].temperatura}.
-              Tipos de conductor: {tiposConductores[temperaturaSeleccionada].tipos}.
-            </p>
-          </div>
+      {/* Common Cable Sizes Table */}
+      <div>
+        <h2 className="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
+          Common Cable Sizes
+        </h2>
+        <div className="p-4 grid grid-cols-2">
+          {calibresComunes.map((item, index) => (
+            <div
+              key={index}
+              className="flex flex-col gap-1 border-t border-solid border-t-[#B0B8C1] py-4 pr-2"
+            >
+              <p className="text-[#00BFA6] text-sm font-normal leading-normal">
+                {item.calibre}
+              </p>
+              <p className="text-white text-sm font-normal leading-normal">
+                {item.amperaje}
+              </p>
+            </div>
+          ))}
         </div>
-
-        {/* Quick Reference Table */}
-        <div className="bg-transparent rounded-xl shadow-md p-6 border border-gray-100">
-          <h3 className="font-semibold text-white mb-4">
-            Referencia Rápida - {tiposMateriales[materialSeleccionado].nombre} {tiposConductores[temperaturaSeleccionada].temperatura}
-          </h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
-            {getTablaActual().slice(0, 8).map((item, index) => (
-              <div key={index} className="bg-[#181C23] rounded-lg p-2 text-center">
-                <div className="font-semibold text-[#00BFA6]">{item.amperaje}A</div>
-                <div className="text-[#F5F7FA]">{item.calibre}</div>
-              </div>
-            ))}
-          </div>
-          <p className="text-xs text-[#B0B8C1] mt-3 text-center">
-            Mostrando los calibres más comunes para {materialSeleccionado}. La calculadora incluye el rango completo.
-          </p>
-        </div>
+        <div className="h-5 bg-[#23272F]"></div>
       </div>
     </div>
   );

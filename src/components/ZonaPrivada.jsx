@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaPlus, FaTrash, FaCalendarAlt } from 'react-icons/fa';
 import ConduitFillCalculator from "./ConduitFillCalculator";
-import { Settings, Thermometer, Calculator, CheckCircle, XCircle } from 'lucide-react';
+import { Settings, Thermometer, Calculator, CheckCircle, XCircle, Zap } from 'lucide-react';
 
 // Tabla de calibres AWG para COBRE 60°C (140°F)
 const tablaCobrre60C = [
@@ -230,12 +230,14 @@ const tiposMateriales = {
   cobre: {
     nombre: "Cobre",
     icono: "🟤",
-    descripcion: "Conductividad superior, uso residencial y comercial"
+    descripcion: "Conductividad superior, uso residencial y comercial",
+    imagen: "https://images.unsplash.com/photo-1582139329536-e7284fece509?w=500&h=300&fit=crop"
   },
   aluminio: {
     nombre: "Aluminio",
     icono: "🔘",
-    descripcion: "Económico, uso industrial y servicios eléctricos"
+    descripcion: "Económico, uso industrial y servicios eléctricos",
+    imagen: "https://images.unsplash.com/photo-1535082783524-2fde8d3d8e6d?w=500&h=300&fit=crop"
   }
 };
 
@@ -1111,104 +1113,439 @@ const ZonaPrivada = () => {
         {/* Herramienta Activa */}
         <div className="mb-10 md:mb-12">
           {calculadoraActiva === "calibre" ? (
-            <div className="bg-transparent rounded-2xl shadow-xl p-8 border border-gray-100">
-              <div className="space-y-6">
-                {/* Material Selector */}
-                <div className="space-y-4">
-                  <label className="block text-base font-semibold text-white flex items-center gap-2">
-                    <Settings className="w-5 h-5 text-[#FFD700]" />
-                    Material del Conductor
-                  </label>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {Object.entries(tiposMateriales).map(([key, info]) => (
-                      <div
-                        key={key}
-                        className={`p-4 rounded-xl border-2 cursor-pointer transition-all duration-200 ${
-                          materialSeleccionado === key
-                            ? "border-[#FFD700] bg-[#FFD700] bg-opacity-20"
-                            : "border-gray-300 hover:border-[#FFD700] hover:bg-[#FFD700] hover:bg-opacity-10"
-                        }`}
-                        onClick={() => setMaterialSeleccionado(key)}
-                      >
-                        <div className="text-center">
-                          <div className="text-lg font-bold text-white">{info.nombre}</div>
-                          <div className="text-sm text-[#00BFA6] font-semibold mt-1">{info.descripcion}</div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Temperature Selector */}
-                <div className="space-y-4">
-                  <label className="block text-base font-semibold text-white flex items-center gap-2">
-                    <Thermometer className="w-5 h-5 text-[#FFD700]" />
-                    Temperatura del Conductor
-                  </label>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    {Object.entries(tiposConductores).map(([key, info]) => (
-                      <div
-                        key={key}
-                        className={`p-4 rounded-xl border-2 cursor-pointer transition-all duration-200 ${
-                          temperaturaSeleccionada === key
-                            ? "border-[#FFD700] bg-[#FFD700] bg-opacity-20"
-                            : "border-gray-300 hover:border-[#FFD700] hover:bg-[#FFD700] hover:bg-opacity-10"
-                        }`}
-                        onClick={() => setTemperaturaSeleccionada(key)}
-                      >
-                        <div className="text-center">
-                          <div className="text-lg font-bold text-white">{info.temperatura}</div>
-                          <div className="text-sm text-[#00BFA6] font-semibold mt-1">{info.tipos}</div>
-                          <div className="text-xs text-gray-400 mt-1">{info.descripcion}</div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Calculadora */}
-                <div className="space-y-4">
-                  <label className="block text-base font-semibold text-white flex items-center gap-2">
-                    <Calculator className="w-5 h-5 text-[#FFD700]" />
-                    Amperaje del Circuito
-                  </label>
-                  <div className="text-sm text-[#B0B8C1] mb-2">
-                    Basado en valores de {tiposMateriales[materialSeleccionado].nombre} {tiposConductores[temperaturaSeleccionada].temperatura} según NEC Tabla 310.16
-                  </div>
-                  <div className="relative">
-                    <input
-                      type="number"
-                      value={amperaje}
-                      onChange={(e) => setAmperaje(e.target.value)}
-                      className="w-full p-4 text-lg border-2 border-gray-300 rounded-lg bg-[#181C23] text-white focus:border-[#FFD700] focus:outline-none"
-                      placeholder="Ingresa el amperaje requerido"
-                    />
-                    <button
-                      onClick={calcular}
-                      className="absolute right-2 top-2 p-2 bg-[#FFD700] text-[#181C23] rounded-lg hover:bg-[#E6C200] transition-colors"
-                    >
-                      <Calculator className="w-6 h-6" />
-                    </button>
-                  </div>
-                </div>
-
-                {/* Resultado */}
-                {resultado && (
-                  <div className={`p-4 rounded-lg border-2 ${
-                    tipoResultado === "success" 
-                      ? "border-green-500 bg-green-500 bg-opacity-20" 
-                      : "border-red-500 bg-red-500 bg-opacity-20"
-                  }`}>
-                    <div className="flex items-center gap-2">
-                      {tipoResultado === "success" ? (
-                        <CheckCircle className="w-5 h-5 text-green-400" />
-                      ) : (
-                        <XCircle className="w-5 h-5 text-red-400" />
-                      )}
-                      <span className="text-white font-semibold">{resultado}</span>
+            <div className="relative flex size-full min-h-screen flex-col bg-[#23272F]">
+              
+              {/* Header - Ancho completo */}
+              <div className="w-full bg-[#23272F] border-b border-[#B0B8C1] border-opacity-20">
+                <div className="max-w-7xl mx-auto px-6 lg:px-8 py-6 lg:py-8">
+                  <div className="flex items-center justify-between">
+                    <h1 className="text-white text-2xl lg:text-4xl font-bold tracking-[-0.015em]">
+                      ⚡ Cable Size Calculator
+                    </h1>
+                    <div className="flex items-center gap-3">
+                      <span className="text-[#FFD700] text-sm lg:text-base font-medium">NEC 2023</span>
+                      <Settings className="w-6 h-6 lg:w-8 lg:h-8 text-[#FFD700]" />
                     </div>
                   </div>
-                )}
+                </div>
+              </div>
+
+              {/* Main Content - Layout optimizado para PC */}
+              <div className="flex-1 w-full">
+                <div className="max-w-7xl mx-auto px-6 lg:px-8 py-8 lg:py-12">
+                  
+                  {/* MÓVIL: Layout vertical */}
+                  <div className="block lg:hidden space-y-8">
+                    {/* Material Selection */}
+                    <div>
+                      <h2 className="text-white text-2xl font-bold mb-6 text-center">
+                        <div className="flex items-center justify-center gap-3">
+                          <div className="w-3 h-10 bg-[#FFD700] rounded-full"></div>
+                          Material
+                          <div className="w-3 h-10 bg-[#FFD700] rounded-full"></div>
+                        </div>
+                      </h2>
+                      <div className="space-y-4">
+                        {Object.entries(tiposMateriales).map(([key, info]) => (
+                          <label
+                            key={key}
+                            className={`block cursor-pointer transition-all duration-300 ${
+                              materialSeleccionado === key ? "transform scale-105" : "hover:scale-102"
+                            }`}
+                          >
+                            <div
+                              className="bg-cover bg-center flex flex-col items-stretch justify-end rounded-2xl pt-[140px] relative overflow-hidden shadow-lg"
+                              style={{
+                                backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.2) 100%), url("${info.imagen}")`
+                              }}
+                            >
+                              <div className="p-6 relative z-10">
+                                <div className="flex items-center justify-between">
+                                  <div className="flex-1">
+                                    <h3 className="text-white text-xl font-bold mb-2">{info.nombre}</h3>
+                                    <p className="text-white text-base opacity-90 leading-relaxed">{info.descripcion}</p>
+                                  </div>
+                                  <div className="ml-4">
+                                    <input
+                                      type="radio"
+                                      name="material"
+                                      value={key}
+                                      checked={materialSeleccionado === key}
+                                      onChange={() => setMaterialSeleccionado(key)}
+                                      className="w-6 h-6 text-[#FFD700] bg-white rounded-full"
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                              {materialSeleccionado === key && (
+                                <div className="absolute inset-0 border-4 border-[#FFD700] rounded-2xl shadow-2xl shadow-[#FFD700]/30"></div>
+                              )}
+                            </div>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Temperature Selection */}
+                    <div>
+                      <h2 className="text-white text-2xl font-bold mb-6 text-center">
+                        <div className="flex items-center justify-center gap-3">
+                          <div className="w-3 h-10 bg-[#00BFA6] rounded-full"></div>
+                          Temperatura
+                          <div className="w-3 h-10 bg-[#00BFA6] rounded-full"></div>
+                        </div>
+                      </h2>
+                      <div className="grid grid-cols-1 gap-4">
+                        {Object.entries(tiposConductores).map(([key, info]) => (
+                          <label
+                            key={key}
+                            className={`flex items-center justify-between rounded-2xl border p-6 text-white cursor-pointer transition-all duration-300 shadow-lg ${
+                              temperaturaSeleccionada === key
+                                ? "border-[#FFD700] bg-[#FFD700] bg-opacity-15 transform scale-105 shadow-xl shadow-[#FFD700]/20"
+                                : "border-[#B0B8C1] border-opacity-30 hover:border-[#FFD700] hover:bg-[#FFD700] hover:bg-opacity-5 hover:scale-102"
+                            }`}
+                          >
+                            <div className="flex-1">
+                              <div className="font-bold text-xl mb-2">{info.temperatura}</div>
+                              <div className="text-base text-[#00BFA6] font-medium">{info.tipos}</div>
+                              <div className="text-sm text-[#B0B8C1] mt-1">{info.descripcion}</div>
+                            </div>
+                            <div className="ml-4">
+                              <input
+                                type="radio"
+                                name="temperature"
+                                value={key}
+                                checked={temperaturaSeleccionada === key}
+                                onChange={() => setTemperaturaSeleccionada(key)}
+                                className="w-6 h-6 text-[#FFD700]"
+                              />
+                            </div>
+                          </label>
+                        ))}
+                      </div>
+                      
+                      {/* Notas explicativas de temperaturas - Móvil */}
+                      <div className="mt-6">
+                        <div className="bg-[#181C23] rounded-2xl p-6 border border-[#B0B8C1] border-opacity-30 shadow-lg">
+                          <h3 className="text-[#FFD700] text-xl font-bold mb-6 text-center flex items-center justify-center gap-2">
+                            <Thermometer className="w-6 h-6" />
+                            Guía de Temperaturas
+                          </h3>
+                          <div className="space-y-6">
+                            <div className="text-center p-4 bg-[#23272F] rounded-xl">
+                              <div className="text-white font-bold text-xl mb-2">60°C</div>
+                              <div className="text-[#B0B8C1] text-sm leading-relaxed">
+                                <strong className="text-white">Uso básico:</strong><br/>
+                                Instalaciones residenciales simples, ambientes secos y temperaturas normales.
+                              </div>
+                            </div>
+                            <div className="text-center p-4 bg-gradient-to-br from-[#FFD700] from-5% to-[#23272F] to-95% rounded-xl border-2 border-[#FFD700]">
+                              <div className="text-[#FFD700] font-bold text-xl mb-2 flex items-center justify-center gap-2">
+                                75°C <span className="text-2xl">⭐</span>
+                              </div>
+                              <div className="text-[#00BFA6] text-sm leading-relaxed font-medium">
+                                <strong className="text-white">MÁS USADO:</strong><br/>
+                                Instalaciones comerciales e industriales estándar. Recomendado para la mayoría de aplicaciones.
+                              </div>
+                            </div>
+                            <div className="text-center p-4 bg-[#23272F] rounded-xl">
+                              <div className="text-white font-bold text-xl mb-2">90°C</div>
+                              <div className="text-[#B0B8C1] text-sm leading-relaxed">
+                                <strong className="text-white">Alta temperatura:</strong><br/>
+                                Ambientes calurosos, motores, equipos industriales pesados.
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Calculator */}
+                    <div>
+                      <h2 className="text-white text-2xl font-bold mb-6 text-center">
+                        <div className="flex items-center justify-center gap-3">
+                          <div className="w-3 h-10 bg-[#FFD700] rounded-full"></div>
+                          Calcular
+                          <div className="w-3 h-10 bg-[#FFD700] rounded-full"></div>
+                        </div>
+                      </h2>
+                      
+                      <div className="bg-[#181C23] rounded-2xl p-8 border border-[#B0B8C1] border-opacity-30 shadow-xl">
+                        <div className="space-y-6">
+                          <div>
+                            <label className="block text-[#B0B8C1] text-base font-medium mb-3 text-center">
+                              Amperaje Requerido
+                            </label>
+                            <input
+                              type="number"
+                              placeholder="Ingresa Amperaje"
+                              className="w-full px-6 py-5 text-xl rounded-2xl text-white bg-[#23272F] border-2 border-[#B0B8C1] focus:border-[#FFD700] focus:outline-none focus:ring-2 focus:ring-[#FFD700] focus:ring-opacity-20 placeholder:text-[#B0B8C1] transition-all duration-300 text-center shadow-lg"
+                              value={amperaje}
+                              onChange={(e) => setAmperaje(e.target.value)}
+                            />
+                          </div>
+                          <button
+                            onClick={calcular}
+                            className="w-full flex items-center justify-center rounded-2xl py-6 px-8 bg-[#FFD700] text-[#23272F] text-xl font-bold hover:bg-[#E6C200] transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105 active:scale-95"
+                          >
+                            <Calculator className="w-7 h-7 mr-3" />
+                            CALCULAR CALIBRE
+                          </button>
+                        </div>
+                      </div>
+                      
+                      {/* Result - Móvil */}
+                      {resultado && (
+                        <div className="mt-6">
+                          <div className="bg-gradient-to-br from-[#00BFA6] from-10% to-[#181C23] to-90% rounded-2xl p-8 border-2 border-[#00BFA6] shadow-2xl shadow-[#00BFA6]/20">
+                            <div className="text-center">
+                              <div className="flex items-center justify-center gap-3 mb-4">
+                                <CheckCircle className="w-10 h-10 text-[#00BFA6]" />
+                                <h3 className="text-[#00BFA6] text-2xl font-bold">Resultado</h3>
+                                <CheckCircle className="w-10 h-10 text-[#00BFA6]" />
+                              </div>
+                              <div className="bg-[#23272F] rounded-xl p-6 border border-[#00BFA6] border-opacity-50">
+                                <p className="text-white text-2xl font-bold leading-relaxed">
+                                  {resultado}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+
+
+                    {/* Common Cable Sizes - Móvil */}
+                    <div>
+                      <h2 className="text-white text-2xl font-bold mb-6 text-center">
+                        <div className="flex items-center justify-center gap-3">
+                          <div className="w-3 h-10 bg-[#FFD700] rounded-full"></div>
+                          Calibres Comunes de Cable
+                          <div className="w-3 h-10 bg-[#FFD700] rounded-full"></div>
+                        </div>
+                      </h2>
+                      <div className="bg-[#181C23] rounded-2xl p-6 border border-[#B0B8C1] border-opacity-30 shadow-xl">
+                        <div className="grid grid-cols-2 gap-6">
+                          {[
+                            { calibre: "14 AWG", amperaje: "15 Amps", desc: "Circuitos básicos" },
+                            { calibre: "12 AWG", amperaje: "20 Amps", desc: "Tomacorrientes" },
+                            { calibre: "10 AWG", amperaje: "30 Amps", desc: "Aire acondicionado" },
+                            { calibre: "8 AWG", amperaje: "40 Amps", desc: "Secadoras eléctricas" },
+                            { calibre: "6 AWG", amperaje: "55 Amps", desc: "Cocinas eléctricas" },
+                            { calibre: "4 AWG", amperaje: "70 Amps", desc: "Servicios pesados" }
+                          ].map((item, index) => (
+                            <div
+                              key={index}
+                              className="bg-[#23272F] rounded-xl p-4 border-l-4 border-[#00BFA6] shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                            >
+                              <div className="text-center">
+                                <p className="text-[#00BFA6] text-lg font-bold mb-1">
+                                  {item.calibre}
+                                </p>
+                                <p className="text-white text-base font-semibold mb-2">
+                                  {item.amperaje}
+                                </p>
+                                <p className="text-[#B0B8C1] text-xs leading-relaxed">
+                                  {item.desc}
+                                </p>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                        
+                        {/* Nota informativa */}
+                        <div className="mt-6 p-4 bg-[#23272F] rounded-xl border border-[#B0B8C1] border-opacity-30">
+                          <div className="text-center">
+                            <Settings className="w-6 h-6 text-[#FFD700] mx-auto mb-2" />
+                            <p className="text-[#B0B8C1] text-sm leading-relaxed">
+                              <strong className="text-[#FFD700]">Nota:</strong> Basado en NEC 2023. Siempre consulta códigos locales y profesionales electricistas.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* DESKTOP: Layout simple y limpio */}
+                  <div className="hidden lg:block">
+                    <div className="relative flex size-full min-h-screen flex-col bg-[#23272F] justify-between">
+                      <div>
+                        {/* Header */}
+                        <div className="flex items-center bg-[#23272F] p-4 pb-2 justify-between">
+                          <h2 className="text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pl-12">
+                            Calculadora de Calibre de Cable
+                          </h2>
+                          <div className="flex w-12 items-center justify-end">
+                            <button className="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 bg-transparent text-white gap-2 text-base font-bold leading-normal tracking-[0.015em] min-w-0 p-0">
+                              <Zap className="w-6 h-6 text-[#FFD700]" />
+                            </button>
+                          </div>
+                        </div>
+
+                        {/* Material Selection */}
+                        <h2 className="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5 text-center">
+                          Material
+                        </h2>
+                        <div className="flex flex-wrap gap-6 p-4 justify-center">
+                          {Object.entries(tiposMateriales).map(([key, info]) => (
+                            <label
+                              key={key}
+                              className={`text-lg font-medium leading-normal flex items-center justify-center rounded-xl border px-8 h-14 text-white cursor-pointer transition-all duration-200 ${
+                                materialSeleccionado === key
+                                  ? "border-[3px] border-[#FFD700] px-7 bg-[#FFD700] bg-opacity-15 shadow-lg"
+                                  : "border border-[#B0B8C1] hover:border-[#FFD700] hover:bg-[#FFD700] hover:bg-opacity-10"
+                              }`}
+                            >
+                              {info.nombre}
+                              <input
+                                type="radio"
+                                className="invisible absolute"
+                                name="material"
+                                value={key}
+                                checked={materialSeleccionado === key}
+                                onChange={(e) => setMaterialSeleccionado(e.target.value)}
+                              />
+                            </label>
+                          ))}
+                        </div>
+
+                        {/* Temperature Selection */}
+                        <h2 className="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5 text-center">
+                          Temperatura
+                        </h2>
+                        <div className="flex flex-wrap gap-6 p-4 justify-center">
+                          {Object.entries(tiposConductores).map(([key, info]) => (
+                            <label
+                              key={key}
+                              className={`text-lg font-medium leading-normal flex items-center justify-center rounded-xl border px-8 h-14 text-white cursor-pointer transition-all duration-200 ${
+                                temperaturaSeleccionada === key
+                                  ? "border-[3px] border-[#FFD700] px-7 bg-[#FFD700] bg-opacity-15 shadow-lg"
+                                  : "border border-[#B0B8C1] hover:border-[#FFD700] hover:bg-[#FFD700] hover:bg-opacity-10"
+                              }`}
+                            >
+                              {info.temperatura}
+                              <input
+                                type="radio"
+                                className="invisible absolute"
+                                name="temperature"
+                                value={key}
+                                checked={temperaturaSeleccionada === key}
+                                onChange={(e) => setTemperaturaSeleccionada(e.target.value)}
+                              />
+                            </label>
+                          ))}
+                        </div>
+                        
+                        {/* Notas explicativas de temperaturas */}
+                        <div className="px-4 pb-4">
+                          <div className="bg-[#181C23] rounded-xl p-6 border border-[#B0B8C1] border-opacity-30">
+                            <h3 className="text-[#FFD700] text-lg font-bold mb-4 text-center">Guía de Temperaturas</h3>
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                              <div className="text-center">
+                                <div className="text-white font-bold text-xl mb-2">60°C</div>
+                                <div className="text-[#B0B8C1] text-sm leading-relaxed">
+                                  <strong>Uso básico:</strong><br/>
+                                  Instalaciones residenciales simples, ambientes secos y temperaturas normales.
+                                </div>
+                              </div>
+                              <div className="text-center border-l border-r border-[#B0B8C1] border-opacity-30 px-4">
+                                <div className="text-[#FFD700] font-bold text-xl mb-2">75°C ⭐</div>
+                                <div className="text-[#00BFA6] text-sm leading-relaxed font-medium">
+                                  <strong>MÁS USADO:</strong><br/>
+                                  Instalaciones comerciales e industriales estándar. Recomendado para la mayoría de aplicaciones.
+                                </div>
+                              </div>
+                              <div className="text-center">
+                                <div className="text-white font-bold text-xl mb-2">90°C</div>
+                                <div className="text-[#B0B8C1] text-sm leading-relaxed">
+                                  <strong>Alta temperatura:</strong><br/>
+                                  Ambientes calurosos, motores, equipos industriales pesados.
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Amperage Input */}
+                        <h2 className="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5 text-center">
+                          Amperaje
+                        </h2>
+                        <div className="flex justify-center px-4 py-3">
+                          <div className="w-full max-w-md">
+                            <input
+                              type="number"
+                              placeholder="Ingresa Amperaje"
+                              className="form-input w-full rounded-xl text-white focus:outline-0 focus:ring-0 border border-[#B0B8C1] bg-[#181C23] focus:border-[#FFD700] h-16 placeholder:text-[#B0B8C1] px-6 text-xl font-normal leading-normal text-center transition-all duration-200"
+                              value={amperaje}
+                              onChange={(e) => setAmperaje(e.target.value)}
+                            />
+                          </div>
+                        </div>
+
+                        {/* Calculate Button */}
+                        <div className="flex justify-center px-4 py-3">
+                          <button
+                            onClick={calcular}
+                            className="flex items-center justify-center rounded-full h-16 px-12 bg-[#FFD700] text-[#23272F] text-xl font-bold leading-normal tracking-[0.015em] hover:bg-[#E6C200] transition-colors duration-200 shadow-xl hover:shadow-2xl transform hover:scale-105"
+                          >
+                            <Calculator className="w-7 h-7 mr-3" />
+                            <span>CALCULAR CALIBRE</span>
+                          </button>
+                        </div>
+
+                        {/* Result */}
+                        {resultado && (
+                          <div className="flex justify-center px-4 py-6">
+                            <div className="bg-gradient-to-r from-[#00BFA6] to-[#00BFA6] bg-opacity-20 rounded-2xl p-6 border-2 border-[#00BFA6] shadow-lg">
+                              <div className="flex items-center justify-center gap-3 mb-2">
+                                <CheckCircle className="w-8 h-8 text-[#00BFA6]" />
+                                <h3 className="text-[#00BFA6] text-xl font-bold">Resultado</h3>
+                              </div>
+                              <p className="text-white text-xl font-bold text-center leading-relaxed">
+                                {resultado}
+                              </p>
+                            </div>
+                          </div>
+                        )}
+
+                      </div>
+
+                      {/* Common Cable Sizes Table */}
+                      <div>
+                        <h2 className="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5 text-center">
+                          Calibres Comunes de Cable
+                        </h2>
+                        <div className="p-4 grid grid-cols-2">
+                          {[
+                            { calibre: "14 AWG", amperaje: "15 Amps" },
+                            { calibre: "12 AWG", amperaje: "20 Amps" },
+                            { calibre: "10 AWG", amperaje: "30 Amps" },
+                            { calibre: "8 AWG", amperaje: "40 Amps" },
+                            { calibre: "6 AWG", amperaje: "55 Amps" },
+                            { calibre: "4 AWG", amperaje: "70 Amps" }
+                          ].map((item, index) => (
+                            <div
+                              key={index}
+                              className="flex flex-col gap-1 border-t border-solid border-t-[#B0B8C1] py-4 pr-2"
+                            >
+                              <p className="text-[#00BFA6] text-sm font-normal leading-normal">
+                                {item.calibre}
+                              </p>
+                              <p className="text-white text-sm font-normal leading-normal">
+                                {item.amperaje}
+                              </p>
+                            </div>
+                          ))}
+                        </div>
+                        <div className="h-5 bg-[#23272F]"></div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                </div>
               </div>
             </div>
           ) : calculadoraActiva === "conduit" ? (
