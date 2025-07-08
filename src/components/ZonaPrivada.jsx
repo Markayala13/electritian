@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { FaPlus, FaTrash, FaCalendarAlt } from 'react-icons/fa';
 import ConduitFillCalculator from "./ConduitFillCalculator";
 import CalculadoraGrounding from "./CalculadoraGrounding";
+import CalculadoraCargaResidencial from "./CalculadoraCargaResidencial";
+import CalculadoraEMTBending from "./CalculadoraEMTBending";
+import CalculadoraVoltageDrop from "./CalculadoraVoltageDrop";
 import { Settings, Thermometer, Calculator, CheckCircle, XCircle, Zap } from 'lucide-react';
 
 // Tabla de calibres AWG para COBRE 60°C (140°F)
@@ -1075,32 +1078,33 @@ const ZonaPrivada = () => {
         </div>
         {/* Selector de Herramienta */}
         <div className="flex justify-center mb-6 md:mb-8">
-          <div className="bg-[#8B8F92] bg-opacity-20 rounded-xl p-2 md:p-4 w-full max-w-2xl flex flex-col md:flex-row gap-2 md:gap-4" style={{boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)'}}>
-            {/* Desktop: Botones en fila */}
-            <div className="flex flex-row md:gap-2 gap-1 w-full justify-center">
+          <div className="bg-[#8B8F92] bg-opacity-20 rounded-xl p-2 md:p-4 w-full max-w-4xl" style={{boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)'}}>
+            
+            {/* MÓVIL: Grid optimizado para 7 botones */}
+            <div className="grid grid-cols-2 gap-2 md:hidden">
               <button
                 onClick={() => setCalculadoraActiva("calibre")}
-                className={`flex-1 px-3 py-3 md:px-6 md:py-3 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 whitespace-nowrap text-xs md:text-base ${
+                className={`px-2 py-3 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center gap-1 text-xs ${
                   calculadoraActiva === "calibre"
                     ? "bg-[#F7B84B] text-[#000000]"
                     : "text-[#8B8F92] font-regular"
                 }`}
               >
-                ⚡ Calibre de Cable
+                ⚡ Calibre
               </button>
               <button
                 onClick={() => setCalculadoraActiva("conduit")}
-                className={`flex-1 px-3 py-3 md:px-6 md:py-3 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 whitespace-nowrap text-xs md:text-base ${
+                className={`px-2 py-3 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center gap-1 text-xs ${
                   calculadoraActiva === "conduit"
                     ? "bg-[#F7B84B] text-[#000000]"
                     : "text-[#8B8F92] font-regular"
                 }`}
               >
-                🔧 Llenado de Conduit
+                🔧 Conduit
               </button>
               <button
                 onClick={() => setCalculadoraActiva("grounding")}
-                className={`flex-1 px-3 py-3 md:px-6 md:py-3 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 whitespace-nowrap text-xs md:text-base ${
+                className={`px-2 py-3 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center gap-1 text-xs ${
                   calculadoraActiva === "grounding"
                     ? "bg-[#F7B84B] text-[#000000]"
                     : "text-[#8B8F92] font-regular"
@@ -1109,8 +1113,112 @@ const ZonaPrivada = () => {
                 🛡️ Grounding
               </button>
               <button
+                onClick={() => setCalculadoraActiva("carga")}
+                className={`px-2 py-3 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center gap-1 text-xs ${
+                  calculadoraActiva === "carga"
+                    ? "bg-[#F7B84B] text-[#000000]"
+                    : "text-[#8B8F92] font-regular"
+                }`}
+              >
+                🏠 Carga m²
+              </button>
+              <button
+                onClick={() => setCalculadoraActiva("emt")}
+                className={`px-2 py-3 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center gap-1 text-xs ${
+                  calculadoraActiva === "emt"
+                    ? "bg-[#F7B84B] text-[#000000]"
+                    : "text-[#8B8F92] font-regular"
+                }`}
+              >
+                🔧 EMT Bend
+              </button>
+              <button
+                onClick={() => setCalculadoraActiva("voltage")}
+                className={`px-2 py-3 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center gap-1 text-xs ${
+                  calculadoraActiva === "voltage"
+                    ? "bg-[#F7B84B] text-[#000000]"
+                    : "text-[#8B8F92] font-regular"
+                }`}
+              >
+                📉 V-Drop
+              </button>
+              <button
                 onClick={() => setCalculadoraActiva("tutoriales")}
-                className={`flex-1 px-3 py-3 md:px-6 md:py-3 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 whitespace-nowrap text-xs md:text-base ${
+                className={`px-2 py-3 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center gap-1 text-xs ${
+                  calculadoraActiva === "tutoriales"
+                    ? "bg-[#F7B84B] text-[#000000]"
+                    : "text-[#8B8F92] font-regular"
+                }`}
+              >
+                📚 Tutoriales
+              </button>
+            </div>
+
+            {/* DESKTOP: Fila horizontal optimizada */}
+            <div className="hidden md:flex md:gap-1 w-full justify-center">
+              <button
+                onClick={() => setCalculadoraActiva("calibre")}
+                className={`flex-1 px-2 py-3 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center gap-1 text-xs lg:text-sm ${
+                  calculadoraActiva === "calibre"
+                    ? "bg-[#F7B84B] text-[#000000]"
+                    : "text-[#8B8F92] font-regular"
+                }`}
+              >
+                ⚡ Calibre
+              </button>
+              <button
+                onClick={() => setCalculadoraActiva("conduit")}
+                className={`flex-1 px-2 py-3 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center gap-1 text-xs lg:text-sm ${
+                  calculadoraActiva === "conduit"
+                    ? "bg-[#F7B84B] text-[#000000]"
+                    : "text-[#8B8F92] font-regular"
+                }`}
+              >
+                🔧 Conduit
+              </button>
+              <button
+                onClick={() => setCalculadoraActiva("grounding")}
+                className={`flex-1 px-2 py-3 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center gap-1 text-xs lg:text-sm ${
+                  calculadoraActiva === "grounding"
+                    ? "bg-[#F7B84B] text-[#000000]"
+                    : "text-[#8B8F92] font-regular"
+                }`}
+              >
+                🛡️ Grounding
+              </button>
+              <button
+                onClick={() => setCalculadoraActiva("carga")}
+                className={`flex-1 px-2 py-3 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center gap-1 text-xs lg:text-sm ${
+                  calculadoraActiva === "carga"
+                    ? "bg-[#F7B84B] text-[#000000]"
+                    : "text-[#8B8F92] font-regular"
+                }`}
+              >
+                🏠 Carga m²
+              </button>
+              <button
+                onClick={() => setCalculadoraActiva("emt")}
+                className={`flex-1 px-2 py-3 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center gap-1 text-xs lg:text-sm ${
+                  calculadoraActiva === "emt"
+                    ? "bg-[#F7B84B] text-[#000000]"
+                    : "text-[#8B8F92] font-regular"
+                }`}
+              >
+                🔧 EMT Bend
+              </button>
+              <button
+                onClick={() => setCalculadoraActiva("voltage")}
+                className={`flex-1 px-2 py-3 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center gap-1 text-xs lg:text-sm ${
+                  calculadoraActiva === "voltage"
+                    ? "bg-[#F7B84B] text-[#000000]"
+                    : "text-[#8B8F92] font-regular"
+                }`}
+              >
+                📉 V-Drop
+              </button>
+              <button
+                onClick={() => setCalculadoraActiva("tutoriales")}
+                className={`flex-1 px-2 py-3 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center gap-1 text-xs lg:text-sm ${
                   calculadoraActiva === "tutoriales"
                     ? "bg-[#F7B84B] text-[#000000]"
                     : "text-[#8B8F92] font-regular"
@@ -1588,6 +1696,51 @@ const ZonaPrivada = () => {
                 </p>
               </div>
               <CalculadoraGrounding />
+            </div>
+          ) : calculadoraActiva === "carga" ? (
+            <div className="bg-[#8B8F92] bg-opacity-10 rounded-xl p-6 md:p-10 mb-8" style={{boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)'}}>
+              <div className="text-center mb-8">
+                <div className="inline-flex items-center justify-center w-14 h-14 md:w-20 md:h-20 bg-[#3B82F6] rounded-full mb-5">
+                  <span className="text-2xl md:text-3xl text-[#FFFFFF]">🏠</span>
+                </div>
+                <h2 className="text-2xl md:text-3xl font-extrabold text-[#F7B84B] mb-3 tracking-wider">
+                  Calculadora de Carga Residencial
+                </h2>
+                <p className="text-[#8B8F92] text-base md:text-lg mb-2 font-medium">
+                  NEC 2023 - Metros Cuadrados → AMPS necesarios
+                </p>
+              </div>
+              <CalculadoraCargaResidencial />
+            </div>
+          ) : calculadoraActiva === "emt" ? (
+            <div className="bg-[#8B8F92] bg-opacity-10 rounded-xl p-6 md:p-10 mb-8" style={{boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)'}}>
+              <div className="text-center mb-8">
+                <div className="inline-flex items-center justify-center w-14 h-14 md:w-20 md:h-20 bg-[#FF6B35] rounded-full mb-5">
+                  <span className="text-2xl md:text-3xl text-[#FFFFFF]">🔧</span>
+                </div>
+                <h2 className="text-2xl md:text-3xl font-extrabold text-[#F7B84B] mb-3 tracking-wider">
+                  EMT Bending Calculator
+                </h2>
+                <p className="text-[#8B8F92] text-base md:text-lg mb-2 font-medium">
+                  Cálculos precisos para todas las técnicas de doblado EMT
+                </p>
+              </div>
+              <CalculadoraEMTBending />
+            </div>
+          ) : calculadoraActiva === "voltage" ? (
+            <div className="bg-[#8B8F92] bg-opacity-10 rounded-xl p-6 md:p-10 mb-8" style={{boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)'}}>
+              <div className="text-center mb-8">
+                <div className="inline-flex items-center justify-center w-14 h-14 md:w-20 md:h-20 bg-[#3B82F6] rounded-full mb-5">
+                  <span className="text-2xl md:text-3xl text-[#FFFFFF]">📉</span>
+                </div>
+                <h2 className="text-2xl md:text-3xl font-extrabold text-[#F7B84B] mb-3 tracking-wider">
+                  Voltage Drop Calculator
+                </h2>
+                <p className="text-[#8B8F92] text-base md:text-lg mb-2 font-medium">
+                  NEC Table 8 - Caída de voltaje en instalaciones largas
+                </p>
+              </div>
+              <CalculadoraVoltageDrop />
             </div>
           ) : calculadoraActiva === "tutoriales" ? (
             <div className="bg-[#8B8F92] bg-opacity-10 rounded-xl p-6 md:p-10 mb-8" style={{boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)'}}>
