@@ -913,6 +913,84 @@ function ComponenteTutoriales() {
           "Aplicación práctica en campo"
         ]
       }
+    ],
+
+    educacionProfesional: [
+      {
+        titulo: "MIT 6.002 - Circuits and Electronics (Complete Course)",
+        canal: "MIT OpenCourseWare - GRATIS",
+        duracion: "Curso Completo MIT + 25 Video Lectures",
+        descripcion: "🎓 Curso COMPLETO de MIT sobre circuitos y electrónica. Nivel universitario, completamente GRATUITO. El mismo curso que toman los estudiantes de MIT.",
+        url: "https://ocw.mit.edu/courses/6-002-circuits-and-electronics-spring-2007/",
+        puntosClave: [
+          "🏫 Universidad MIT - Nivel mundial",
+          "📚 25+ video lectures completas",
+          "🔬 Labs y simulaciones incluidos",
+          "📋 Exámenes y soluciones",
+          "⚡ Análisis de circuitos AC/DC",
+          "🎯 Completamente GRATIS"
+        ]
+      },
+      {
+        titulo: "Walter Lewin: Electricity and Magnetism (MIT Physics)",
+        canal: "MIT Physics - Legendario",
+        duracion: "36 Video Lectures Completas",
+        descripcion: "⚡ Las LEGENDARIAS clases de Walter Lewin en MIT. Considerado el mejor profesor de física del mundo. Demostraciones espectaculares.",
+        url: "https://www.youtube.com/watch?v=AfQxyVuLeCs",
+        puntosClave: [
+          "🌟 Profesor legendario de MIT",
+          "⚡ Electromagnetismo completo",
+          "🎭 Demostraciones espectaculares",
+          "🏫 36 lectures de MIT",
+          "🔬 Experimentos en vivo",
+          "🎓 Nivel universitario MIT"
+        ]
+      },
+      {
+        titulo: "Khan Academy: Electrical Engineering Complete Series",
+        canal: "Khan Academy - Totalmente Gratis",
+        duracion: "Series Completas + Ejercicios",
+        descripcion: "📚 Curso completo de ingeniería eléctrica por Khan Academy. Desde lo básico hasta temas avanzados. Con ejercicios interactivos.",
+        url: "https://www.youtube.com/playlist?list=PLSQl0a2vh4HBSM5a6HtETI__plvXdNdb4",
+        puntosClave: [
+          "📖 Fundamentos hasta avanzado",
+          "🔢 Ejercicios interactivos",
+          "⚡ Análisis de circuitos",
+          "📊 Ley de Ohm y Kirchhoff",
+          "🎯 Explicaciones claras",
+          "🆓 Totalmente gratuito"
+        ]
+      },
+      {
+        titulo: "Mike Holt NEC Training - Understanding the NEC",
+        canal: "Mike Holt Enterprises",
+        duracion: "Videos Profesionales NEC",
+        descripcion: "🔥 Mike Holt es EL EXPERTO mundial en NEC. Videos profesionales para entender el código eléctrico nacional. Reconocido por toda la industria.",
+        url: "https://www.youtube.com/user/mikeholtnec",
+        puntosClave: [
+          "👑 EL experto mundial en NEC",
+          "📋 Código eléctrico nacional",
+          "🏭 Usado por toda la industria",
+          "⚡ Aplicaciones prácticas",
+          "🎓 Nivel profesional",
+          "📺 Cientos de videos gratis"
+        ]
+      },
+      {
+        titulo: "Khan Academy: Circuit Analysis and Ohm's Law",
+        canal: "Khan Academy Physics",
+        duracion: "Serie Circuitos Completa",
+        descripcion: "🔌 Serie completa sobre análisis de circuitos, ley de Ohm, y fundamentos eléctricos. Perfecto para entender los principios básicos.",
+        url: "https://www.youtube.com/watch?v=F_vLWkkOETI",
+        puntosClave: [
+          "⚡ Ley de Ohm explicada",
+          "🔌 Análisis de circuitos",
+          "📊 Resistencia y voltaje",
+          "🔬 Ejemplos prácticos",
+          "📖 Fundamentos sólidos",
+          "🎯 Fácil de entender"
+        ]
+      }
     ]
   };
 
@@ -922,7 +1000,8 @@ function ComponenteTutoriales() {
     { id: "panels", nombre: "Panels", icono: "📊", color: "orange" },
     { id: "bathroomFanLights", nombre: "Bathroom Fan & Lights", icono: "💡", color: "yellow" },
     { id: "casetaLutron", nombre: "Caseta Lutron", icono: "🏠", color: "purple" },
-    { id: "bendingPipes", nombre: "Bending Pipes", icono: "🔧", color: "red" }
+    { id: "bendingPipes", nombre: "Bending Pipes", icono: "🔧", color: "red" },
+    { id: "educacionProfesional", nombre: "Educación Profesional", icono: "🎓", color: "indigo" }
   ];
 
   return (
@@ -985,7 +1064,7 @@ function ComponenteTutoriales() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-[#F7B84B] text-[#000000] font-semibold py-2 px-4 rounded-lg hover:bg-[#F7B84B] hover:opacity-90 transition-all duration-200"
               >
-                ▶️ Ver en YouTube
+                {categoriaActiva === "educacionProfesional" ? "🎓 Ver Curso" : "▶️ Ver en YouTube"}
               </a>
             </div>
           ))

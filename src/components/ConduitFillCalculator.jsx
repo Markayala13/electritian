@@ -83,7 +83,7 @@ const conductorAreas = {
     '1250': 1.7180, // NUEVO TAMAÑO
     '1500': 2.0156, // NUEVO TAMAÑO
     '1750': 2.3127, // NUEVO TAMAÑO
-    '2000': 2.6079  // NUEVO TAMAÑO
+    '2000': 2.6073  // NUEVO TAMAÑO - CORREGIDO según NEC Table 5
   }
 };
 
@@ -187,16 +187,16 @@ const ConduitFillCalculator = () => {
     },
     // Liquidtight Flexible Metalic (LFMC) - NEC 2023 Article 350 CORREGIDO
     'Liquidtight Flexible Metalic': {
-      '0.5': 0.077,    // CORREGIDO: era 0.138 - NEC 2023 Art. 350
-      '0.75': 0.125,   // CORREGIDO: era 0.242 - NEC 2023 Art. 350
-      '1': 0.216,      // CORREGIDO: era 0.399 - NEC 2023 Art. 350
-      '1.25': 0.349,   // CORREGIDO: era 0.684 - NEC 2023 Art. 350
-      '1.5': 0.611,    // CORREGIDO: era 0.832 - NEC 2023 Art. 350
-      '2': 1.298,      // CORREGIDO: era 1.360 - NEC 2023 Art. 350
-      '2.5': 1.953,    // CORREGIDO: era 2.276 - NEC 2023 Art. 350
-      '3': 2.990,      // CORREGIDO: era 3.864 - NEC 2023 Art. 350
-      '3.5': 3.893,    // CORREGIDO: era 4.858 - NEC 2023 Art. 350
-      '4': 5.077       // CORREGIDO: era 6.684 - NEC 2023 Art. 350
+      '0.5': 0.125,    // CORREGIDO: NEC 2023 Table 4 - Art. 350
+      '0.75': 0.216,   // CORREGIDO: NEC 2023 Table 4 - Art. 350
+      '1': 0.349,      // CORREGIDO: NEC 2023 Table 4 - Art. 350
+      '1.25': 0.611,   // CORREGIDO: NEC 2023 Table 4 - Art. 350
+      '1.5': 0.792,    // CORREGIDO: NEC 2023 Table 4 - Art. 350
+      '2': 1.298,      // ✅ CORRECTO - NEC 2023 Table 4 - Art. 350
+      '2.5': 1.953,    // ✅ CORRECTO - NEC 2023 Table 4 - Art. 350
+      '3': 2.990,      // ✅ CORRECTO - NEC 2023 Table 4 - Art. 350
+      '3.5': 3.893,    // ✅ CORRECTO - NEC 2023 Table 4 - Art. 350
+      '4': 5.077       // ✅ CORRECTO - NEC 2023 Table 4 - Art. 350
     }
   };
 
